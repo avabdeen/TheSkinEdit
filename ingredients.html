@@ -1,51 +1,1091 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ingredient Library | The Skin Edit</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-:root{--navy:#173b62;--blue:#7399bd;--pale:#f4f8fc;--line:#dce6ef;--ink:#263b50;--muted:#6c7e90}
-*{box-sizing:border-box}body{margin:0;background:var(--pale);color:var(--ink);font-family:"DM Sans",Arial,sans-serif;line-height:1.65}
-a{color:inherit;text-decoration:none}.top{padding:20px 5%;background:#fff;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{font-weight:700;letter-spacing:2px;color:var(--navy)}nav{display:flex;gap:18px;font-size:13px;color:var(--navy)}
-main{width:min(1080px,92%);margin:45px auto 70px}.eyebrow{color:#628bb0;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
-h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:400;color:var(--navy);line-height:1.2}h1{font-size:clamp(40px,6vw,58px);margin:12px 0}h2{font-size:25px;margin:0 0 10px}.intro{max-width:650px;color:var(--muted)}
-.tools{display:grid;grid-template-columns:1fr 230px;gap:12px;margin:28px 0}.tools input,.tools select{width:100%;padding:13px;border:1px solid #cbd9e6;border-radius:6px;background:#fff;font:inherit;color:var(--ink)}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{background:#fff;border:1px solid var(--line);border-radius:9px;padding:22px}.category{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#628bb0;font-weight:700}.card h2{margin-top:9px}.card p{font-size:13px;color:var(--muted)}.label{font-size:11px;font-weight:700;color:var(--navy);margin-top:15px}.source{font-size:12px;color:var(--navy);text-decoration:underline}.empty{padding:25px;background:#fff;border-radius:8px;color:var(--muted)}.notice{margin-top:25px;padding:18px;background:#e7f0f8;border-radius:8px;color:#52677d;font-size:12px}
-footer{border-top:1px solid var(--line);padding:25px;text-align:center;font-size:11px;color:var(--muted)}
-@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tools{grid-template-columns:1fr}nav{gap:10px;flex-wrap:wrap}}
-@media(max-width:520px){.grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+:root {
+  --ink:#292744;
+  --muted:#77758e;
+  --purple:#7965dc;
+  --pink:#f5a4cf;
+  --blue:#91c9f5;
+  --green:#9cddc5;
+  --yellow:#f6d985;
+  --line:#ebe8f5;
+  --white:#fff;
+}
+* {box-sizing:border-box}
+body {
+  margin:0;
+  font-family:"DM Sans",sans-serif;
+  color:var(--ink);
+  background:#faf8ff;
+  line-height:1.6;
+}
+a {color:inherit;text-decoration:none}
+button,input,select {font:inherit}
+button {cursor:pointer}
+.top {
+  background:#fff;
+  padding:17px 5%;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.brand {
+  font-size:13px;
+  letter-spacing:2px;
+  font-weight:800;
+}
+.brand span {color:var(--purple)}
+nav {display:flex;gap:19px;flex-wrap:wrap;font-size:12px}
+nav a:hover {color:var(--purple)}
+main {width:min(1160px,92%);margin:35px auto 70px}
+.hero {
+  position:relative;
+  overflow:hidden;
+  padding:clamp(28px,6vw,65px);
+  border-radius:30px;
+  background:linear-gradient(125deg,#eee7ff,#fce9f5 52%,#e4f4ff);
+}
+.hero:after {
+  content:"✳";
+  position:absolute;
+  right:5%;
+  top:0;
+  color:#fff;
+  font-size:150px;
+  opacity:.7;
+  transform:rotate(15deg);
+}
+.eyebrow {
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2.2px;
+  text-transform:uppercase;
+  color:#7965b5;
+}
+h1,h2,h3 {line-height:1.2}
+h1 {
+  font-family:"Playfair Display",serif;
+  font-size:clamp(42px,7vw,72px);
+  font-weight:400;
+  max-width:700px;
+  margin:12px 0;
+}
+.hero p {max-width:620px;color:#66617e;font-size:14px}
+.pills {display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.pill {
+  display:inline-block;
+  padding:7px 12px;
+  border:1px solid #ffffffb8;
+  border-radius:30px;
+  background:#ffffff8c;
+  font-size:11px;
+  font-weight:700;
+}
+.section {margin-top:42px}
+.section-head {
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+h2 {
+  font-family:"Playfair Display",serif;
+  font-weight:400;
+  font-size:clamp(25px,4vw,34px);
+  margin:5px 0;
+}
+.small {font-size:12px;color:var(--muted)}
+.layout {
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);
+  gap:20px;
+  align-items:start;
+}
+.panel {
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:23px;
+  padding:23px;
+  box-shadow:0 8px 28px #55448a08;
+}
+.search-row {
+  display:grid;
+  grid-template-columns:1fr 190px;
+  gap:10px;
+  margin:18px 0 13px;
+}
+.search-row input,.search-row select {
+  min-width:0;
+  width:100%;
+  padding:12px 14px;
+  background:#fff;
+  border:1px solid #e4dff0;
+  border-radius:12px;
+  outline:none;
+  color:var(--ink);
+}
+.search-row input:focus,.search-row select:focus {
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px #7965dc18;
+}
+.legend {display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 20px}
+.legend span {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:10px;
+  color:#5e5a74;
+  background:#faf9fd;
+  border-radius:30px;
+  padding:6px 9px;
+}
+.dot {width:9px;height:9px;border-radius:50%;display:inline-block}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.ingredient {
+  position:relative;
+  overflow:hidden;
+  text-align:left;
+  border:1px solid transparent;
+  border-radius:17px;
+  padding:16px;
+  color:var(--ink);
+  min-width:0;
+  transition:transform .18s,box-shadow .18s;
+}
+.ingredient:hover {
+  transform:translateY(-3px);
+  box-shadow:0 9px 20px #29274412;
+}
+.ingredient .symbol {font-size:23px}
+.ingredient .type {
+  display:inline-block;
+  margin-top:9px;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+.ingredient h3 {font-size:17px;margin:7px 0 5px}
+.ingredient p {font-size:11px;margin:0;color:#656078}
+.ingredient .open {font-size:10px;font-weight:800;margin-top:12px;display:block}
+.acid {background:#fff0f4;border-color:#f8d9e5}
+.hydration {background:#eaf6ff;border-color:#d5ebfb}
+.bright {background:#fff6d9;border-color:#f5e8ad}
+.barrier {background:#eaf8ef;border-color:#d6efdf}
+.retinoid {background:#f1eaff;border-color:#e1d5fb}
+.soothing {background:#e7f9f5;border-color:#cfeee7}
+.antioxidant {background:#fff0e3;border-color:#f6dfc8}
+.other {background:#f1efff;border-color:#e1dcfb}
+.empty {
+  padding:22px;
+  background:#faf9fd;
+  border-radius:15px;
+  color:var(--muted);
+  font-size:13px;
+  grid-column:1/-1;
+}
+.face-panel {
+  background:linear-gradient(155deg,#f2ecff,#eaf7ff);
+  border:1px solid #e2dcfa;
+  border-radius:23px;
+  padding:22px;
+}
+.face-panel h2 {font-size:27px}
+.face-map {
+  width:100%;
+  max-width:290px;
+  display:block;
+  margin:10px auto;
+}
+.zone {
+  cursor:pointer;
+  stroke:#fff;
+  stroke-width:3;
+  transition:opacity .2s,filter .2s;
+}
+.zone:hover,.zone.active {filter:brightness(.94);stroke:#6550c7;stroke-width:4}
+.zone-label {
+  font-family:"DM Sans",sans-serif;
+  font-size:10px;
+  font-weight:800;
+  fill:#39314e;
+  pointer-events:none;
+  text-anchor:middle;
+}
+.zone-buttons {display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.zone-btn {
+  flex:1 1 40%;
+  padding:9px;
+  border:1px solid #ded7f6;
+  border-radius:11px;
+  background:#ffffffb8;
+  font-size:11px;
+  font-weight:700;
+  color:var(--ink);
+}
+.zone-btn.active {background:#7863d9;color:white;border-color:#7863d9}
+.zone-info {
+  margin-top:14px;
+  padding:16px;
+  border-radius:15px;
+  background:#ffffffc9;
+}
+.zone-info h3 {margin:0 0 5px;font-size:17px}
+.zone-info p {font-size:12px;color:#68627c;margin:5px 0}
+.zone-info .tip {font-weight:700;color:#6c55bd}
+.premium {
+  margin-top:24px;
+  padding:24px;
+  border-radius:23px;
+  color:white;
+  background:linear-gradient(120deg,#493b89,#8164d8 58%,#bd78c7);
+  position:relative;
+  overflow:hidden;
+}
+.premium:after {
+  content:"✦";
+  position:absolute;
+  right:18px;
+  top:0;
+  font-size:75px;
+  color:#ffffff23;
+}
+.premium h2 {color:white;font-size:28px}
+.premium p {font-size:12px;color:#f0eaff}
+.price {font-size:28px;font-weight:800;margin:12px 0}
+.price small {font-size:12px;font-weight:500}
+.premium ul {padding-left:18px;font-size:12px;color:#f6f1ff}
+.primary {
+  display:inline-block;
+  border:0;
+  background:#fff;
+  color:#57459e;
+  padding:12px 17px;
+  border-radius:12px;
+  font-weight:800;
+  font-size:12px;
+}
+.note {
+  margin-top:17px;
+  padding:14px;
+  border-radius:13px;
+  background:#f8f6ff;
+  font-size:11px;
+  color:#6c6780;
+}
+footer {
+  text-align:center;
+  padding:28px;
+  border-top:1px solid var(--line);
+  background:#fff;
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* Ingredient detail pop-up */
+.modal-backdrop {
+  display:none;
+  position:fixed;
+  z-index:100;
+  inset:0;
+  background:#25203d9c;
+  padding:18px;
+  align-items:center;
+  justify-content:center;
+}
+.modal-backdrop.show {display:flex}
+.modal {
+  width:min(600px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:24px;
+  background:#fff;
+  padding:26px;
+  box-shadow:0 20px 80px #0002;
+}
+.modal-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:start;
+  gap:12px;
+}
+.modal h2 {font-size:32px;margin:6px 0}
+.close {
+  border:0;
+  background:#f0edfa;
+  border-radius:50%;
+  width:37px;
+  height:37px;
+  font-size:20px;
+  color:var(--ink);
+  flex-shrink:0;
+}
+.detail-chip {
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:800;
+  background:#f0ecff;
+  color:#6d57b7;
+}
+.detail-box {
+  padding:14px;
+  background:#f8f7fc;
+  border-radius:14px;
+  margin-top:12px;
+}
+.detail-box h3 {font-size:15px;margin:0 0 5px}
+.detail-box p {font-size:12px;color:#69647d;margin:0}
+.locked {
+  position:relative;
+  margin-top:12px;
+  overflow:hidden;
+  border-radius:15px;
+  border:1px solid #e7dff9;
+}
+.locked-content {padding:15px;filter:blur(5px);user-select:none}
+.locked-content h3 {font-size:15px}
+.locked-content p {font-size:12px}
+.lock-overlay {
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  padding:15px;
+  background:#ffffff8a;
+}
+.lock-overlay strong {font-size:13px}
+.lock-overlay span {font-size:11px;color:#635b7e;margin-top:4px}
+.lock-overlay button {
+  border:0;
+  margin-top:9px;
+  border-radius:10px;
+  padding:10px 13px;
+  color:white;
+  background:#7863d9;
+  font-size:11px;
+  font-weight:800;
+}
+.modal-foot {font-size:10px;color:var(--muted);margin-top:14px}
+
+@media(max-width:850px) {
+  .layout {grid-template-columns:1fr}
+  .face-panel {order:-1}
+}
+@media(max-width:520px) {
+  .search-row {grid-template-columns:1fr}
+  .grid {grid-template-columns:1fr}
+  .top {align-items:flex-start}
+  nav {gap:12px}
+  .panel {padding:16px}
+  .modal {padding:19px}
+}
 </style>
 </head>
+
 <body>
-<header class="top"><a class="brand" href="index.html">THE SKIN EDIT</a><nav><a href="routine.html">Free routine</a><a href="products.html">Product guide</a><a href="index.html">Home</a></nav></header>
+<header class="top">
+  <a class="brand" href="index.html">THE <span>SKIN</span> EDIT ✳</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="routine.html">Routine builder</a>
+    <a href="products.html">Products</a>
+    <a href="personal-edit.html">My Skin Edit</a>
+  </nav>
+</header>
+
 <main>
-<p class="eyebrow">The knowledge edit</p><h1>Ingredients, explained.</h1>
-<p class="intro">A plain-English starting point for understanding common skincare ingredients. Search by name or filter by topic. These summaries are educational, not medical advice.</p>
-<div class="tools">
-<input id="search" type="search" placeholder="Search ingredients, e.g. niacinamide" aria-label="Search ingredients">
-<select id="category" aria-label="Filter by category"><option value="">All topics</option></select>
-</div>
-<p id="count" class="intro" aria-live="polite"></p>
-<div id="results" class="grid"></div>
-<div class="notice">Ingredient effects depend on the full product formula and the individual. Introduce products cautiously, stop using a product if it irritates your skin, and ask a qualified health professional about persistent skin concerns. Sources are linked on each card.</div>
+  <section class="hero">
+    <div class="eyebrow">Your skincare study guide · 01</div>
+    <h1>Get to know your <em>ingredients.</em></h1>
+    <p>
+      Acids, vitamins, hydrators, retinoids and all the other skincare
+      words that sound complicated. Discover what they do, why they're
+      used and what to consider before trying them.
+    </p>
+    <div class="pills">
+      <span class="pill">✳ Ingredient dictionary</span>
+      <span class="pill">♡ Face-zone guide</span>
+      <span class="pill">✦ Premium preview</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Explore the library</div>
+        <h2>The ingredient edit</h2>
+        <div class="small">Choose a card to open its ingredient guide.</div>
+      </div>
+      <div class="small" id="count">Loading ingredients…</div>
+    </div>
+
+    <div class="layout">
+      <section class="panel">
+        <div class="eyebrow">Find your ingredient</div>
+        <div class="search-row">
+          <input id="search" type="search"
+            placeholder="Try salicylic acid, niacinamide…"
+            aria-label="Search ingredients">
+          <select id="filter" aria-label="Filter ingredient category">
+            <option value="all">All categories</option>
+            <option value="acid">Exfoliating acids</option>
+            <option value="hydration">Hydration</option>
+            <option value="bright">Brightening</option>
+            <option value="barrier">Skin barrier</option>
+            <option value="retinoid">Retinoids</option>
+            <option value="soothing">Soothing</option>
+            <option value="antioxidant">Antioxidants</option>
+            <option value="other">Other ingredients</option>
+          </select>
+        </div>
+
+        <div class="legend">
+          <span><i class="dot" style="background:#ef8eae"></i> Acids</span>
+          <span><i class="dot" style="background:#7dc2f4"></i> Hydration</span>
+          <span><i class="dot" style="background:#edc94d"></i> Brightening</span>
+          <span><i class="dot" style="background:#77c99e"></i> Barrier</span>
+          <span><i class="dot" style="background:#ad91ef"></i> Retinoids</span>
+          <span><i class="dot" style="background:#f2ad70"></i> Antioxidants</span>
+        </div>
+
+        <div class="grid" id="grid"></div>
+      </section>
+
+      <aside>
+        <section class="face-panel">
+          <div class="eyebrow">Interactive skin map</div>
+          <h2>Your face, zone by zone.</h2>
+          <p class="small">
+            Tap a coloured area to explore general skincare considerations.
+            Skin varies from person to person.
+          </p>
+
+          <svg class="face-map" viewBox="0 0 280 325" role="img"
+               aria-label="Interactive illustrated face map">
+            <defs>
+              <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#f6d3c6"/>
+                <stop offset="100%" stop-color="#eebba9"/>
+              </linearGradient>
+            </defs>
+            <path d="M65 92 Q48 80 52 111 Q56 137 72 141
+                     M215 92 Q232 80 228 111 Q224 137 208 141"
+              fill="#efc2b1" stroke="#d8a493" stroke-width="2"/>
+            <path d="M63 80 Q67 28 140 26 Q213 28 217 80
+                     L207 169 Q199 237 140 260
+                     Q81 237 73 169 Z"
+              fill="url(#skin)" stroke="#d9a898" stroke-width="2"/>
+            <!-- Forehead -->
+            <path class="zone active" data-zone="forehead"
+              d="M76 68 Q140 39 204 68 L197 107
+                 Q140 92 83 107 Z" fill="#f3a9cb"/>
+            <!-- Cheeks -->
+            <path class="zone" data-zone="cheeks"
+              d="M77 126 Q95 116 119 133 L112 176
+                 Q91 184 77 161 Z" fill="#9edfc9"/>
+            <path class="zone" data-zone="cheeks"
+              d="M203 126 Q185 116 161 133 L168 176
+                 Q189 184 203 161 Z" fill="#9edfc9"/>
+            <!-- T zone -->
+            <path class="zone" data-zone="tzone"
+              d="M120 101 Q140 94 160 101 L153 159
+                 L140 175 L127 159 Z" fill="#94c9f3"/>
+            <!-- Chin -->
+            <path class="zone" data-zone="chin"
+              d="M115 191 Q140 201 165 191 L158 222
+                 Q140 239 122 222 Z" fill="#f4d77e"/>
+            <!-- Features -->
+            <path d="M91 113 Q105 105 119 113
+                     M161 113 Q175 105 189 113"
+              fill="none" stroke="#72564e" stroke-width="3" stroke-linecap="round"/>
+            <path d="M97 126 Q106 132 115 126
+                     M165 126 Q174 132 183 126"
+              fill="none" stroke="#6e504b" stroke-width="2" stroke-linecap="round"/>
+            <path d="M140 122 L132 156 Q140 163 148 156"
+              fill="none" stroke="#c18e7d" stroke-width="2" stroke-linecap="round"/>
+            <path d="M122 204 Q140 213 158 204"
+              fill="none" stroke="#bb777f" stroke-width="3" stroke-linecap="round"/>
+            <text class="zone-label" x="140" y="74">FOREHEAD</text>
+            <text class="zone-label" x="97" y="151">CHEEK</text>
+            <text class="zone-label" x="183" y="151">CHEEK</text>
+            <text class="zone-label" x="140" y="142">T-ZONE</text>
+            <text class="zone-label" x="140" y="220">CHIN</text>
+          </svg>
+
+          <div class="zone-buttons">
+            <button class="zone-btn active" data-zone-button="forehead">Forehead</button>
+            <button class="zone-btn" data-zone-button="cheeks">Cheeks</button>
+            <button class="zone-btn" data-zone-button="tzone">Nose / T-zone</button>
+            <button class="zone-btn" data-zone-button="chin">Chin</button>
+          </div>
+
+          <div class="zone-info" id="zoneInfo" aria-live="polite">
+            <h3>Forehead</h3>
+            <p>Different areas can have different needs. Notice how your skin feels rather than assuming a concern from appearance alone.</p>
+            <p class="tip">Explore gentle cleansing and moisturising first.</p>
+          </div>
+          <p class="small">Educational guide only — this map cannot diagnose a skin condition.</p>
+        </section>
+
+        <section class="premium">
+          <div class="eyebrow" style="color:#e8dcff">The Skin Edit Plus</div>
+          <h2>Your deeper ingredient guide.</h2>
+          <p>Explore the Premium concept for more detailed ingredient notes and product-learning features.</p>
+          <div class="price">A$6.99 <small>/ month</small></div>
+          <ul>
+            <li>Expanded ingredient explainers</li>
+            <li>More detailed skin-type considerations</li>
+            <li>Ingredient comparison guides</li>
+          </ul>
+          <button class="primary" id="premiumButton">Explore Premium ✦</button>
+          <p style="font-size:10px">Preview only. No payment is collected by this page.</p>
+        </section>
+      </aside>
+    </div>
+
+    <div class="note">
+      <strong>Friendly skincare reminder:</strong> more ingredients do not
+      automatically mean better results. Strong exfoliating acids and retinoids
+      can irritate skin, especially when combined. Keep routines simple,
+      introduce products cautiously and use broad-spectrum sunscreen during
+      the day. If you have persistent skin concerns, ask a qualified health
+      professional.
+    </div>
+  </section>
 </main>
-<footer>© <span id="year"></span> The Skin Edit · Skin science, simplified.</footer>
-<script src="data.js"></script>
+
+<div class="modal-backdrop" id="modalBackdrop" role="dialog"
+     aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-top">
+      <div>
+        <div id="modalCategory" class="detail-chip">INGREDIENT GUIDE</div>
+        <h2 id="modalTitle">Ingredient name</h2>
+        <div class="small" id="modalSubtitle"></div>
+      </div>
+      <button class="close" id="closeModal" aria-label="Close ingredient guide">×</button>
+    </div>
+
+    <div class="detail-box">
+      <h3>♡ What it does</h3>
+      <p id="modalWhat"></p>
+    </div>
+    <div class="detail-box">
+      <h3>✳ How it may help</h3>
+      <p id="modalHelp"></p>
+    </div>
+
+    <div class="locked">
+      <div class="locked-content">
+        <h3>Skin-type considerations</h3>
+        <p id="lockedType">Expanded notes about how an ingredient may suit different skin needs.</p>
+        <h3>How to use it</h3>
+        <p id="lockedUse">General use considerations and possible interactions.</p>
+      </div>
+      <div class="lock-overlay">
+        <strong>✦ Premium ingredient notes</strong>
+        <span>Extra information is blurred in this concept preview.</span>
+        <button id="modalPremium">Explore A$6.99/month</button>
+      </div>
+    </div>
+    <div class="modal-foot">
+      Educational information only. Actual results depend on the product formula
+      and individual skin. This preview does not provide personalised medical advice.
+    </div>
+  </div>
+</div>
+
+<footer>© <span id="year"></span> The Skin Edit · Curious about skincare? Start here. ✳</footer>
+
 <script>
-document.getElementById("year").textContent=new Date().getFullYear();
-const items=window.SKIN_EDIT_DATA.ingredients;
-const search=document.getElementById("search"), category=document.getElementById("category"), results=document.getElementById("results");
-[...new Set(items.map(x=>x.category))].sort().forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;category.appendChild(o)});
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function render(){
- const q=search.value.trim().toLowerCase(), cat=category.value;
- const filtered=items.filter(x=>(!cat||x.category===cat)&&(!q||[x.name,x.category,x.summary,x.why,x.goodToKnow,...x.tags].join(" ").toLowerCase().includes(q)));
- document.getElementById("count").textContent=`Showing ${filtered.length} of ${items.length} ingredient guides`;
- results.innerHTML=filtered.length?filtered.map(x=>`<article class="card"><div class="category">${esc(x.category)}</div><h2>${esc(x.name)}</h2><p>${esc(x.summary)}</p><div class="label">Why it's used</div><p>${esc(x.why)}</p><div class="label">Good to know</div><p>${esc(x.goodToKnow)}</p><div class="label">Considerations</div><p>${esc(x.cautions)}</p><a class="source" href="${esc(x.source)}" target="_blank" rel="noopener noreferrer">Read source ↗</a></article>`).join(""):`<div class="empty">No matches yet. Try another word or choose “All topics”.</div>`;
+const ingredients = [
+  {
+    name:"Glycolic Acid", group:"acid", icon:"🍋",
+    type:"AHA · Exfoliating acid",
+    what:"An alpha hydroxy acid (AHA) that helps loosen the bonds between dead surface skin cells.",
+    help:"May improve the look of uneven texture and dullness. Results depend on the product strength and formula.",
+    skin:"Can irritate sensitive or dry skin. A gentle routine is important.",
+    use:"Avoid jumping straight into strong peels or using several exfoliants together. Sunscreen is important."
+  },
+  {
+    name:"Lactic Acid", group:"acid", icon:"🥛",
+    type:"AHA · Exfoliating acid",
+    what:"An AHA used to exfoliate the skin's surface. It is often found in leave-on skincare.",
+    help:"May help skin feel smoother. Some formulas also contain moisturising ingredients.",
+    skin:"A product's strength and overall formula matter more than the ingredient name alone.",
+    use:"Introduce cautiously and do not stack with multiple strong exfoliating products."
+  },
+  {
+    name:"Mandelic Acid", group:"acid", icon:"🌸",
+    type:"AHA · Exfoliating acid",
+    what:"An AHA with a larger molecular size than glycolic acid.",
+    help:"Used in products designed to exfoliate and improve the look of uneven texture.",
+    skin:"It may be tolerated differently from other AHAs, but can still cause irritation.",
+    use:"Start gently and avoid combining several exfoliants at once."
+  },
+  {
+    name:"Salicylic Acid", group:"acid", icon:"🫧",
+    type:"BHA · Exfoliating acid",
+    what:"A beta hydroxy acid (BHA) that can work within oil in pores.",
+    help:"Used in some products to help clear pore build-up and manage the appearance of blackheads.",
+    skin:"Can be drying or irritating, particularly when overused.",
+    use:"Follow the product directions. Avoid using multiple acne actives together without professional guidance."
+  },
+  {
+    name:"Azelaic Acid", group:"bright", icon:"🌷",
+    type:"Dicarboxylic acid",
+    what:"An ingredient used in skincare for uneven-looking tone and blemish-prone skin.",
+    help:"May help improve the appearance of uneven tone and some blemish-related marks.",
+    skin:"Some people experience stinging or dryness, especially when first using it.",
+    use:"Follow the directions for the particular product and ask a pharmacist or clinician if unsure."
+  },
+  {
+    name:"Hyaluronic Acid", group:"hydration", icon:"💧",
+    type:"Humectant · Hydration",
+    what:"A humectant that attracts and holds water in the skin's outer layers.",
+    help:"Can help skin feel hydrated and temporarily look plumper.",
+    skin:"Found in many types of moisturising products and often works well in simple routines.",
+    use:"Use as directed and apply a moisturiser if your routine needs more hydration."
+  },
+  {
+    name:"Polyglutamic Acid", group:"hydration", icon:"🩵",
+    type:"Humectant · Hydration",
+    what:"A water-binding ingredient used in some hydrating formulas.",
+    help:"Can help improve the feel of surface hydration and softness.",
+    skin:"The full formula matters, especially if you react to fragrance or other ingredients.",
+    use:"Usually used as part of a hydrating serum or moisturiser."
+  },
+  {
+    name:"Niacinamide", group:"bright", icon:"🌞",
+    type:"Vitamin B3",
+    what:"A form of vitamin B3 used in a wide range of skincare products.",
+    help:"May support the skin barrier and improve the appearance of uneven tone and visible oiliness.",
+    skin:"Often included in products for many skin types, but high concentrations can irritate some people.",
+    use:"A basic moisturiser or a product with a modest concentration can be a simple starting point."
+  },
+  {
+    name:"Vitamin C", group:"antioxidant", icon:"🍊",
+    type:"Antioxidant",
+    what:"A group of antioxidant skincare ingredients, including L-ascorbic acid and its derivatives.",
+    help:"Some formulas are designed to improve the appearance of uneven tone and protect against environmental oxidative stress.",
+    skin:"Different forms have different stability and irritation potential.",
+    use:"Packaging and formulation matter. Use sunscreen as part of daytime skincare."
+  },
+  {
+    name:"Vitamin E", group:"antioxidant", icon:"🌻",
+    type:"Antioxidant",
+    what:"An antioxidant used in moisturisers and other skincare formulas.",
+    help:"Can help condition skin and is often paired with other antioxidants.",
+    skin:"The complete formula matters; some people react to particular products.",
+    use:"Often found in moisturisers. Patch-test new products if you have a history of reactions."
+  },
+  {
+    name:"Retinol", group:"retinoid", icon:"🌙",
+    type:"Retinoid · Vitamin A derivative",
+    what:"A vitamin A derivative used in some products for texture and signs of ageing.",
+    help:"Can affect skin-cell turnover and may improve the appearance of texture over time.",
+    skin:"May cause dryness, redness and irritation. Stronger is not automatically better.",
+    use:"For teenagers, don't start a retinoid just because it's trending. Ask a clinician or pharmacist whether it's appropriate. Retinoids should be avoided during pregnancy."
+  },
+  {
+    name:"Retinal", group:"retinoid", icon:"✨",
+    type:"Retinoid · Vitamin A derivative",
+    what:"Also called retinaldehyde, it is a vitamin A derivative used in some skincare formulas.",
+    help:"Used in products targeting skin texture and visible signs of ageing.",
+    skin:"It may irritate skin, and products vary in strength.",
+    use:"Seek professional advice before starting a retinoid, particularly if you are young or have sensitive skin. Avoid during pregnancy."
+  },
+  {
+    name:"Ceramides", group:"barrier", icon:"🧱",
+    type:"Barrier-supporting lipids",
+    what:"Lipids that are naturally part of the skin's protective outer barrier.",
+    help:"Moisturisers containing ceramides can help support the skin barrier and reduce moisture loss.",
+    skin:"Often useful in moisturising formulas for dry or easily irritated skin.",
+    use:"Look for them in moisturisers rather than assuming a single ingredient fixes every skin concern."
+  },
+  {
+    name:"Squalane", group:"barrier", icon:"🫒",
+    type:"Emollient",
+    what:"An emollient used to soften skin and help reduce moisture loss.",
+    help:"Can leave skin feeling smoother and more comfortable.",
+    skin:"Texture and tolerance depend on the full formula and your own skin.",
+    use:"Often found in moisturisers and facial oils. Use a small amount according to the product directions."
+  },
+  {
+    name:"Glycerin", group:"hydration", icon:"💦",
+    type:"Humectant · Hydration",
+    what:"A widely used humectant that helps draw water into the outer skin layer.",
+    help:"Helps support hydration and softness in moisturisers and cleansers.",
+    skin:"Used in products made for a wide range of skin types.",
+    use:"Usually included in a formula with other ingredients that help maintain moisture."
+  },
+  {
+    name:"Panthenol", group:"soothing", icon:"🩷",
+    type:"Pro-vitamin B5",
+    what:"A moisturising ingredient also known as provitamin B5.",
+    help:"Can help condition skin and support a comfortable, hydrated feel.",
+    skin:"Common in moisturisers and soothing formulas.",
+    use:"Useful to recognise on labels, but the overall formula still matters."
+  },
+  {
+    name:"Allantoin", group:"soothing", icon:"🌿",
+    type:"Skin-conditioning ingredient",
+    what:"An ingredient used to condition skin and improve the feel of a formula.",
+    help:"Often included in products designed to feel soothing and moisturising.",
+    skin:"Tolerance depends on the whole product, including fragrance and preservatives.",
+    use:"Often found in creams, lotions and other leave-on products."
+  },
+  {
+    name:"Centella Asiatica", group:"soothing", icon:"🍃",
+    type:"Botanical extract",
+    what:"A plant extract used in a variety of skincare formulas.",
+    help:"Often included in products marketed for soothing and skin comfort.",
+    skin:"Plant-derived does not automatically mean allergy-free or irritation-free.",
+    use:"Check the complete ingredient list if you have known sensitivities."
+  },
+  {
+    name:"Colloidal Oatmeal", group:"soothing", icon:"🌾",
+    type:"Skin protectant ingredient",
+    what:"Finely milled oat material used in some moisturising products.",
+    help:"Can help soothe dry-feeling skin and support skin comfort.",
+    skin:"People with an oat allergy should check with a health professional before using oat-based products.",
+    use:"Often found in moisturisers intended for dry or sensitive-feeling skin."
+  },
+  {
+    name:"Peptides", group:"other", icon:"🧬",
+    type:"Short chains of amino acids",
+    what:"A broad group of ingredients used in skincare formulas.",
+    help:"Different peptides are used for different purposes; evidence varies by peptide and product.",
+    skin:"The term 'peptides' alone does not tell you how effective a formula is.",
+    use:"Check the product's claims and full formula rather than relying on the word peptide alone."
+  },
+  {
+    name:"Zinc Oxide", group:"other", icon:"☀️",
+    type:"Mineral UV filter",
+    what:"A mineral UV-filter ingredient used in sunscreens.",
+    help:"Helps protect skin from ultraviolet radiation when used in a properly formulated sunscreen.",
+    skin:"Some sunscreen formulas may leave a visible cast; finish varies by product.",
+    use:"Choose broad-spectrum SPF 30 or higher and follow the label, including reapplication."
+  },
+  {
+    name:"Titanium Dioxide", group:"other", icon:"⛅",
+    type:"Mineral UV filter",
+    what:"A mineral UV-filter ingredient used in sunscreens.",
+    help:"Helps protect against UV radiation as part of a properly formulated sunscreen.",
+    skin:"The protection offered depends on the finished product, not the ingredient name alone.",
+    use:"Choose broad-spectrum sunscreen and follow the label directions."
+  },
+  {
+    name:"Benzoyl Peroxide", group:"other", icon:"🧴",
+    type:"Acne-treatment ingredient",
+    what:"An ingredient used in some acne treatments.",
+    help:"Can help manage acne-causing bacteria and blemishes in appropriate products.",
+    skin:"May cause dryness and irritation, and can bleach fabric.",
+    use:"Ask a pharmacist or clinician about the right product and directions, especially if you are young or have sensitive skin."
+  },
+  {
+    name:"Urea", group:"hydration", icon:"💧",
+    type:"Humectant / skin softener",
+    what:"An ingredient that attracts water; higher concentrations can also soften thickened skin.",
+    help:"Can help moisturise dry skin. The effect depends on its concentration and the product.",
+    skin:"Some formulas can sting irritated or cracked skin.",
+    use:"Use according to the product label and seek advice for persistent skin problems."
+  },
+  {
+    name:"Lactic Acid (Moisturising)", group:"acid", icon:"🫧",
+    type:"AHA · Formula-dependent",
+    what:"Lactic acid can act as an exfoliant, but its role depends on the formula and concentration.",
+    help:"Some products use it for exfoliation, while other formulas focus on moisturising.",
+    skin:"Acid products may irritate sensitive skin, even when marketed as gentle.",
+    use:"Read the product directions rather than assuming every lactic-acid product works the same way."
+  },
+  {
+    name:"Kojic Acid", group:"bright", icon:"🌼",
+    type:"Tone-evening ingredient",
+    what:"An ingredient used in some products designed for the appearance of uneven pigmentation.",
+    help:"May help improve the look of uneven tone in certain formulations.",
+    skin:"It can irritate some people. Results and tolerance vary.",
+    use:"Use only as directed and avoid aggressive combinations. Ask a professional about persistent pigmentation."
+  },
+  {
+    name:"Tranexamic Acid", group:"bright", icon:"💜",
+    type:"Tone-evening ingredient",
+    what:"An ingredient used in some topical products targeting the appearance of uneven pigmentation.",
+    help:"May help improve the look of uneven tone in suitable formulas.",
+    skin:"Evidence and effectiveness depend on the formulation and concern being addressed.",
+    use:"Use according to the product label and include sunscreen in daytime skincare."
+  },
+  {
+    name:"Licorice Root Extract", group:"bright", icon:"🌱",
+    type:"Botanical extract",
+    what:"A plant-derived ingredient used in some products for uneven-looking tone.",
+    help:"Certain components are studied for soothing and tone-evening properties.",
+    skin:"Plant extracts can still cause sensitivity in some people.",
+    use:"Check the full ingredient list and introduce new products cautiously."
+  },
+  {
+    name:"Green Tea Extract", group:"antioxidant", icon:"🍵",
+    type:"Antioxidant botanical",
+    what:"A plant extract containing polyphenols, used in skincare formulas.",
+    help:"Often included in products designed to provide antioxidant and soothing benefits.",
+    skin:"Benefits depend on the extract, concentration and full formula.",
+    use:"A useful ingredient to recognise, but it is not a replacement for sunscreen."
+  },
+  {
+    name:"Petrolatum", group:"barrier", icon:"🛡️",
+    type:"Occlusive moisturiser",
+    what:"An occlusive ingredient that forms a protective layer over the skin.",
+    help:"Helps reduce water loss and protect very dry areas.",
+    skin:"Can feel rich or greasy, depending on how and where it is applied.",
+    use:"Often used on dry patches. Ask a clinician if you have a persistent rash or skin condition."
+  },
+  {
+    name:"Dimethicone", group:"barrier", icon:"☁️",
+    type:"Skin protectant / emollient",
+    what:"A silicone-based ingredient used to soften skin and improve product texture.",
+    help:"Can help skin feel smooth and reduce moisture loss.",
+    skin:"Found in many moisturisers and sunscreens; the whole formula determines how it feels.",
+    use:"Commonly used in leave-on products. Choose a formula that feels comfortable on your skin."
+  },
+  {
+    name:"L-Ascorbic Acid", group:"antioxidant", icon:"🍊",
+    type:"Vitamin C · Specific form",
+    what:"A form of vitamin C used in antioxidant skincare formulas.",
+    help:"May improve the appearance of uneven tone in a well-formulated product.",
+    skin:"It can sting or irritate, and some formulas are unstable if poorly stored.",
+    use:"Follow the label and storage advice; daytime sunscreen remains important."
+  },
+  {
+    name:"PHA (Gluconolactone)", group:"acid", icon:"🩵",
+    type:"Polyhydroxy acid",
+    what:"A polyhydroxy acid used in some exfoliating skincare products.",
+    help:"Can help exfoliate the skin's surface; some PHA formulas also support hydration.",
+    skin:"It may be gentler for some people than certain other acids, but irritation is still possible.",
+    use:"Introduce cautiously and avoid stacking multiple exfoliating products."
+  },
+  {
+    name:"Mandelic + Lactic Acids", group:"acid", icon:"🌸",
+    type:"AHA blend",
+    what:"A combination of two alpha hydroxy acids in one formula.",
+    help:"Designed to exfoliate the skin's surface, depending on the product's strength.",
+    skin:"Combining acids can increase irritation risk. A blend is not automatically suitable for everyone.",
+    use:"Follow the label and avoid adding extra exfoliants until you know how the product feels."
+  },
+  {
+    name:"Sodium Hyaluronate", group:"hydration", icon:"💎",
+    type:"Hyaluronic acid salt",
+    what:"A form of hyaluronic acid commonly used in hydrating products.",
+    help:"Helps attract and retain water in the skin's outer layers.",
+    skin:"Often included in serums and moisturisers for many skin types.",
+    use:"Look at the whole formula and pair with a moisturiser if needed."
+  },
+  {
+    name:"Cholesterol", group:"barrier", icon:"🧱",
+    type:"Barrier lipid",
+    what:"A lipid naturally found in the skin barrier and used in some moisturisers.",
+    help:"Can help support barrier function when combined appropriately with other lipids.",
+    skin:"Often appears alongside ceramides and fatty acids in barrier-focused formulas.",
+    use:"Usually used as part of a complete moisturiser rather than alone."
+  },
+  {
+    name:"Fatty Acids", group:"barrier", icon:"🫒",
+    type:"Barrier-supporting lipids",
+    what:"A broad group of lipids used in skincare and naturally present in skin.",
+    help:"Certain fatty acids help condition skin and support moisturising formulas.",
+    skin:"Different fatty acids and oils behave differently; the formula matters.",
+    use:"Check the complete product ingredients, especially if you have known sensitivities."
+  },
+  {
+    name:"Sulfur", group:"other", icon:"🟡",
+    type:"Acne-treatment ingredient",
+    what:"An ingredient used in some products for blemish-prone skin.",
+    help:"May help with some acne-related concerns in suitable formulations.",
+    skin:"Can be drying and has a distinctive smell in some products.",
+    use:"Follow the label and ask a pharmacist or clinician if you are unsure which treatment is appropriate."
+  },
+  {
+    name:"Azulene", group:"soothing", icon:"💙",
+    type:"Soothing ingredient",
+    what:"A component found in some botanical-derived skincare ingredients.",
+    help:"Used in formulas marketed for soothing and skin comfort.",
+    skin:"Botanical origin does not guarantee that a product will suit sensitive skin.",
+    use:"Check the full formula and stop using a product if it causes irritation."
+  }
+];
+
+const categoryNames = {
+  acid:"EXFOLIATING ACID",
+  hydration:"HYDRATION",
+  bright:"BRIGHTENING",
+  barrier:"SKIN BARRIER",
+  retinoid:"RETINOID",
+  soothing:"SOOTHING",
+  antioxidant:"ANTIOXIDANT",
+  other:"OTHER INGREDIENT"
+};
+
+const search = document.getElementById("search");
+const filter = document.getElementById("filter");
+const grid = document.getElementById("grid");
+const count = document.getElementById("count");
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
 }
-search.addEventListener("input",render);category.addEventListener("change",render);render();
+
+function renderIngredients() {
+  const q = search.value.trim().toLowerCase();
+  const category = filter.value;
+
+  const shown = ingredients.filter(item => {
+    const text = [
+      item.name,item.type,item.what,item.help,item.skin,item.use,item.group
+    ].join(" ").toLowerCase();
+    return (category === "all" || item.group === category) && text.includes(q);
+  });
+
+  count.textContent = `${shown.length} ingredient guides`;
+
+  if (!shown.length) {
+    grid.innerHTML = '<div class="empty">No matches yet ✳ Try a different word or choose another category.</div>';
+    return;
+  }
+
+  grid.innerHTML = shown.map(item => {
+    const index = ingredients.indexOf(item);
+    return `
+      <button type="button"
+        class="ingredient ${escapeHTML(item.group)}"
+        data-index="${index}"
+        aria-label="Open ${escapeHTML(item.name)} ingredient guide">
+        <div class="symbol">${item.icon}</div>
+        <div class="type">${escapeHTML(categoryNames[item.group])}</div>
+        <h3>${escapeHTML(item.name)}</h3>
+        <p>${escapeHTML(item.type)}</p>
+        <span class="open">Explore ingredient ↗</span>
+      </button>`;
+  }).join("");
+}
+
+search.addEventListener("input",renderIngredients);
+filter.addEventListener("change",renderIngredients);
+
+grid.addEventListener("click",event => {
+  const card = event.target.closest("[data-index]");
+  if (!card) return;
+  openIngredient(ingredients[Number(card.dataset.index)]);
+});
+
+const backdrop = document.getElementById("modalBackdrop");
+
+function openIngredient(item) {
+  document.getElementById("modalCategory").textContent =
+    `${item.icon} ${categoryNames[item.group]}`;
+  document.getElementById("modalTitle").textContent = item.name;
+  document.getElementById("modalSubtitle").textContent = item.type;
+  document.getElementById("modalWhat").textContent = item.what;
+  document.getElementById("modalHelp").textContent = item.help;
+  document.getElementById("lockedType").textContent = item.skin;
+  document.getElementById("lockedUse").textContent = item.use;
+  backdrop.classList.add("show");
+  document.getElementById("closeModal").focus();
+}
+
+function closeIngredient() {
+  backdrop.classList.remove("show");
+}
+
+document.getElementById("closeModal").addEventListener("click",closeIngredient);
+backdrop.addEventListener("click",event => {
+  if (event.target === backdrop) closeIngredient();
+});
+document.addEventListener("keydown",event => {
+  if (event.key === "Escape") closeIngredient();
+});
+
+function premiumPreview() {
+  alert(
+    "The Skin Edit Plus · A$6.99/month\n\n" +
+    "This is a design preview only. Secure checkout, subscriptions, " +
+    "accounts and cancellation are not connected, and no payment will be taken."
+  );
+}
+document.getElementById("premiumButton").addEventListener("click",premiumPreview);
+document.getElementById("modalPremium").addEventListener("click",premiumPreview);
+
+const zones = {
+  forehead:{
+    title:"Forehead",
+    text:"The forehead can be oilier for some people, while others experience dryness or sensitivity. There is no single ingredient that everyone needs here.",
+    tip:"Keep it simple: gentle cleanser, moisturiser and daytime sunscreen."
+  },
+  cheeks:{
+    title:"Cheeks",
+    text:"Cheeks can be more prone to dryness or sensitivity in some people. Pay attention to comfort rather than treating every visible mark.",
+    tip:"A fragrance-free moisturiser may help support comfortable skin."
+  },
+  tzone:{
+    title:"Nose / T-zone",
+    text:"The nose and central forehead may produce more visible oil for some people. Oiliness is normal and does not mean skin is dirty.",
+    tip:"Avoid harsh scrubbing. If using an acne treatment, follow its label."
+  },
+  chin:{
+    title:"Chin",
+    text:"The chin can experience different skin changes from the rest of the face. A face map cannot determine the cause of bumps or irritation.",
+    tip:"Avoid picking or adding several strong actives at once."
+  }
+};
+
+function selectZone(zone) {
+  if (!zones[zone]) return;
+
+  document.querySelectorAll("[data-zone]").forEach(el => {
+    el.classList.toggle("active",el.dataset.zone === zone);
+  });
+  document.querySelectorAll("[data-zone-button]").forEach(el => {
+    el.classList.toggle("active",el.dataset.zoneButton === zone);
+  });
+
+  const item = zones[zone];
+  document.getElementById("zoneInfo").innerHTML = `
+    <h3>${escapeHTML(item.title)}</h3>
+    <p>${escapeHTML(item.text)}</p>
+    <p class="tip">${escapeHTML(item.tip)}</p>`;
+}
+
+document.querySelectorAll("[data-zone]").forEach(el => {
+  el.addEventListener("click",() => selectZone(el.dataset.zone));
+});
+document.querySelectorAll("[data-zone-button]").forEach(el => {
+  el.addEventListener("click",() => selectZone(el.dataset.zoneButton));
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+renderIngredients();
 </script>
 </body>
 </html>
