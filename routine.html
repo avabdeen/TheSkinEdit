@@ -1,315 +1,70 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f8fc">
-  <title>Build Your Free Routine | The Skin Edit</title>
-  <meta name="description" content="Build a simple skincare routine with The Skin Edit's free educational routine builder.">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --navy: #173b62;
-      --blue: #7399bd;
-      --pale: #f4f8fc;
-      --line: #dce6ef;
-      --ink: #263b50;
-      --muted: #6c7e90;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--pale);
-      color: var(--ink);
-      font-family: "DM Sans", Arial, sans-serif;
-      line-height: 1.65;
-    }
-    a { color: inherit; text-decoration: none; }
-    .top {
-      background: white;
-      border-bottom: 1px solid var(--line);
-      padding: 20px 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .brand { color: var(--navy); font-weight: 700; letter-spacing: 2px; }
-    .back { font-size: 13px; color: var(--navy); }
-    main { width: min(760px, 92%); margin: 48px auto 70px; }
-    .eyebrow {
-      color: #628bb0; font-size: 11px; letter-spacing: 2px;
-      text-transform: uppercase; font-weight: 700;
-    }
-    h1, h2, h3 { color: var(--navy); font-family: "Playfair Display", Georgia, serif; font-weight: 400; line-height: 1.2; }
-    h1 { font-size: clamp(38px, 7vw, 54px); margin: 12px 0; }
-    h2 { font-size: 30px; }
-    .intro { color: var(--muted); max-width: 580px; }
-    .panel {
-      background: white; border: 1px solid var(--line); border-radius: 12px;
-      padding: clamp(20px, 5vw, 34px); margin-top: 28px;
-    }
-    .question { padding: 20px 0; border-bottom: 1px solid var(--line); }
-    .question:last-of-type { border-bottom: 0; }
-    fieldset { border: 0; margin: 0; padding: 0; }
-    legend { color: var(--navy); font-weight: 700; margin-bottom: 12px; }
-    .hint { color: var(--muted); font-size: 12px; margin: -5px 0 12px; }
-    .choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .choice { position: relative; }
-    .choice input { position: absolute; opacity: 0; }
-    .choice label {
-      display: block; padding: 12px; border: 1px solid var(--line);
-      border-radius: 7px; cursor: pointer; font-size: 13px; height: 100%;
-    }
-    .choice input:checked + label {
-      border-color: var(--navy); background: #eaf2f9; color: var(--navy);
-      box-shadow: inset 0 0 0 1px var(--navy);
-    }
-    .choice input:focus-visible + label { outline: 3px solid #8db8df; }
-    .button {
-      display: inline-block; border: 0; border-radius: 6px; padding: 14px 20px;
-      background: var(--navy); color: white; font: inherit; font-weight: 600;
-      font-size: 13px; cursor: pointer; text-align: center;
-    }
-    .button:hover { background: #254f78; }
-    .button-outline { background: white; color: var(--navy); border: 1px solid #bdcede; }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-    .error { color: #a22b36; font-size: 13px; margin-top: 12px; }
-    .results { display: none; }
-    .routine-item { padding: 17px 0; border-bottom: 1px solid var(--line); }
-    .routine-item:last-child { border-bottom: 0; }
-    .routine-item h3 { font-size: 22px; margin: 5px 0; }
-    .step { color: #6488aa; font-size: 10px; letter-spacing: 1.5px; font-weight: 700; }
-    .routine-item p { color: var(--muted); font-size: 14px; margin: 5px 0; }
-    .tag {
-      display: inline-block; padding: 4px 9px; border-radius: 20px;
-      background: #eaf2f9; color: var(--navy); font-size: 11px;
-    }
-    .note { color: var(--muted); font-size: 12px; margin-top: 20px; }
-    .upgrade { background: #e7f0f8; padding: 23px; border-radius: 9px; margin-top: 25px; }
-    .upgrade h3 { font-size: 25px; margin: 5px 0; }
-    footer { padding: 24px 5%; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: 11px; }
-    @media (max-width: 480px) {
-      .choices { grid-template-columns: 1fr; }
-      .top { padding: 17px 4%; }
-      main { margin-top: 32px; }
-      .actions .button { width: 100%; }
-    }
-  </style>
-</head>
-
-<body>
-  <header class="top">
-    <a class="brand" href="index.html">THE SKIN EDIT</a>
-    <a class="back" href="index.html">← Back to home</a>
-  </header>
-
-  <main>
-    <p class="eyebrow">Your starting point · Free</p>
-    <h1>Build your basic routine.</h1>
-    <p class="intro">
-      Answer four quick questions to get a simple starting point for
-      choosing skincare. You don't need a complicated routine to begin.
-    </p>
-
-    <form id="routineForm" class="panel">
-      <div class="question">
-        <fieldset>
-          <legend>1. How does your skin usually feel?</legend>
-          <p class="hint">Choose the closest match, or select "Not sure".</p>
-          <div class="choices">
-            <div class="choice"><input required type="radio" name="feel" id="dry" value="dry"><label for="dry">Dry or tight</label></div>
-            <div class="choice"><input type="radio" name="feel" id="oily" value="oily"><label for="oily">Oily or shiny</label></div>
-            <div class="choice"><input type="radio" name="feel" id="mixed" value="mixed"><label for="mixed">A mix of both</label></div>
-            <div class="choice"><input type="radio" name="feel" id="unsure" value="unsure"><label for="unsure">Not sure</label></div>
-          </div>
-        </fieldset>
-      </div>
-
-      <div class="question">
-        <fieldset>
-          <legend>2. What kind of products do you prefer?</legend>
-          <div class="choices">
-            <div class="choice"><input required type="radio" name="texture" id="light" value="light"><label for="light">Lightweight textures</label></div>
-            <div class="choice"><input type="radio" name="texture" id="rich" value="rich"><label for="rich">Richer, creamier textures</label></div>
-            <div class="choice"><input type="radio" name="texture" id="any" value="any"><label for="any">No preference</label></div>
-            <div class="choice"><input type="radio" name="texture" id="simple" value="simple"><label for="simple">As few products as possible</label></div>
-          </div>
-        </fieldset>
-      </div>
-
-      <div class="question">
-        <fieldset>
-          <legend>3. What's your budget per product?</legend>
-          <div class="choices">
-            <div class="choice"><input required type="radio" name="budget" id="low" value="low"><label for="low">Under A$15</label></div>
-            <div class="choice"><input type="radio" name="budget" id="mid" value="mid"><label for="mid">A$15–30</label></div>
-            <div class="choice"><input type="radio" name="budget" id="high" value="high"><label for="high">Over A$30</label></div>
-            <div class="choice"><input type="radio" name="budget" id="budgetany" value="any"><label for="budgetany">Flexible</label></div>
-          </div>
-        </fieldset>
-      </div>
-
-      <div class="question">
-        <fieldset>
-          <legend>4. Do you prefer fragrance-free products?</legend>
-          <p class="hint">Fragrance-free products can be a sensible choice if fragrance tends to bother your skin.</p>
-          <div class="choices">
-            <div class="choice"><input required type="radio" name="fragrance" id="free" value="free"><label for="free">Yes, fragrance-free</label></div>
-            <div class="choice"><input type="radio" name="fragrance" id="either" value="either"><label for="either">No preference</label></div>
-          </div>
-        </fieldset>
-      </div>
-
-      <button class="button" type="submit">Build my free routine ↗</button>
-      <p class="error" id="error" role="alert"></p>
-      <p class="note">Your answers are used in this page only. This prototype does not save or send them.</p>
-    </form>
-
-    <section id="results" class="panel results" aria-live="polite" tabindex="-1">
-      <p class="eyebrow">Your free edit</p>
-      <h2>A simple place to start.</h2>
-      <p id="summary" class="intro"></p>
-
-      <div class="routine-item">
-        <span class="step">STEP 01 · MORNING & EVENING</span>
-        <h3>Gentle cleanser</h3>
-        <span class="tag" id="cleanserTag">Your preference</span>
-        <p id="cleanserText"></p>
-      </div>
-
-      <div class="routine-item">
-        <span class="step">STEP 02 · MORNING & EVENING</span>
-        <h3>Moisturiser</h3>
-        <span class="tag" id="moisturiserTag">Your preference</span>
-        <p id="moisturiserText"></p>
-      </div>
-
-      <div class="routine-item">
-        <span class="step">STEP 03 · MORNING</span>
-        <h3>Broad-spectrum SPF 50 or 50+ sunscreen</h3>
-        <p>Choose a sunscreen you can apply generously and comfortably. Follow its label and reapply as directed, especially when outdoors.</p>
-      </div>
-
-      <div class="routine-item">
-        <span class="step">OPTIONAL · NOT A NECESSITY</span>
-        <h3>Serum</h3>
-        <p>Start with the basics first. A serum is optional, not a required step. If you decide to add one, choose a simple product that suits your preferences and introduce one new product at a time.</p>
-      </div>
-
-      <p class="note" id="budgetText"></p>
-
-      <div class="upgrade">
-        <p class="eyebrow">Want more detail?</p>
-        <h3>The Personal Edit · A$7.99</h3>
-        <p class="intro">
-          Explore the proposed paid version with a more detailed routine
-          planner, product comparisons and explanations.
-        </p>
-        <div class="actions">
-          <a class="button" href="personal-edit.html">Explore the Personal Edit ↗</a>
-          <button class="button button-outline" id="startAgain" type="button">Start again</button>
-        </div>
-      </div>
-
-      <p class="note">
-        This is general skincare education, not a diagnosis or personalised medical advice.
-        Skin-feel descriptions alone cannot determine a skin condition. If you have persistent
-        irritation or a skin concern, ask a qualified health professional for advice.
-      </p>
-    </section>
-  </main>
-
-  <footer>© <span id="year"></span> The Skin Edit · Skin science, simplified.</footer>
-
-  <script>
-    const form = document.getElementById("routineForm");
-    const results = document.getElementById("results");
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      if (!form.reportValidity()) return;
-
-      const data = new FormData(form);
-      const feel = data.get("feel");
-      const texture = data.get("texture");
-      const budget = data.get("budget");
-      const fragrance = data.get("fragrance");
-
-      const feelDescriptions = {
-        dry: "You said your skin often feels dry or tight.",
-        oily: "You said your skin often feels oily or shiny.",
-        mixed: "You said your skin can feel different in different areas.",
-        unsure: "You aren't sure how to describe your skin yet — that's completely fine."
-      };
-
-      document.getElementById("summary").textContent =
-        feelDescriptions[feel] +
-        " These answers help reflect your preferences, but they don't identify a skin condition.";
-
-      const cleanserAdvice = {
-        dry: "Consider a gentle, non-stripping cleanser. If cleansing leaves your skin feeling tight, try a gentler option.",
-        oily: "Consider a gentle cleanser that removes everyday oil without leaving your skin feeling stripped.",
-        mixed: "A gentle, balanced cleanser is a sensible place to start.",
-        unsure: "A gentle cleanser suitable for everyday use is a simple starting point."
-      };
-
-      document.getElementById("cleanserText").textContent =
-        cleanserAdvice[feel] + " Avoid harsh scrubbing.";
-
-      const moisturiserAdvice = {
-        dry: "Consider a creamier moisturiser if you prefer a richer feel.",
-        oily: "You may prefer a lightweight lotion or gel-cream, depending on comfort.",
-        mixed: "A comfortable lotion or cream can be a useful starting point.",
-        unsure: "Choose a moisturiser that feels comfortable and leaves your skin feeling hydrated."
-      };
-
-      let moisturiserText = moisturiserAdvice[feel];
-      if (texture === "light") {
-        moisturiserText += " Your preference: lightweight textures.";
-      } else if (texture === "rich") {
-        moisturiserText += " Your preference: richer textures.";
-      } else if (texture === "simple") {
-        moisturiserText += " Keep it simple and avoid adding unnecessary steps.";
-      }
-
-      document.getElementById("moisturiserText").textContent = moisturiserText;
-
-      const fragranceText = fragrance === "free"
-        ? "Look for a fragrance-free formula."
-        : "Compare formulas and choose one that feels comfortable for you.";
-
-      document.getElementById("cleanserTag").textContent =
-        fragrance === "free" ? "Fragrance-free preference" : "Gentle everyday care";
-      document.getElementById("moisturiserTag").textContent = fragranceText;
-
-      const budgetDescriptions = {
-        low: "Budget guide: focus on affordable basics under A$15 per product. Check current prices and product labels.",
-        mid: "Budget guide: look for options around A$15–30 per product. Higher prices do not automatically mean better results.",
-        high: "Budget guide: you prefer options over A$30 per product. Price alone doesn't establish quality or suitability.",
-        any: "Budget guide: compare options at different prices and choose products that suit your preferences."
-      };
-      document.getElementById("budgetText").textContent =
-        budgetDescriptions[budget];
-
-      form.style.display = "none";
-      results.style.display = "block";
-      results.focus();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    document.getElementById("startAgain").addEventListener("click", function() {
-      form.reset();
-      form.style.display = "block";
-      results.style.display = "none";
-      document.getElementById("error").textContent = "";
-      form.scrollIntoView({ behavior: "smooth" });
-    });
-  </script>
-</body>
-</html>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Free Routine Builder | The Skin Edit</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#173b62;--blue:#7399bd;--pale:#f4f8fc;--line:#dce6ef;--ink:#263b50;--muted:#6c7e90}*{box-sizing:border-box}body{margin:0;background:var(--pale);color:var(--ink);font-family:"DM Sans",Arial,sans-serif;line-height:1.65}a{color:inherit;text-decoration:none}.top{padding:20px 5%;background:white;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px}.brand{color:var(--navy);font-weight:700;letter-spacing:2px}main{width:min(800px,92%);margin:45px auto 70px}.eyebrow{color:#628bb0;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700}h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:400;color:var(--navy);line-height:1.2}h1{font-size:clamp(38px,6vw,54px);margin:12px 0}h2{font-size:30px}.intro{color:var(--muted)}.panel{background:white;border:1px solid var(--line);border-radius:10px;padding:clamp(20px,5vw,32px);margin-top:25px}.question{padding:20px 0;border-bottom:1px solid var(--line)}fieldset{border:0;padding:0;margin:0}legend{font-weight:700;color:var(--navy);margin-bottom:12px}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.choice input{position:absolute;opacity:0}.choice label{display:block;height:100%;padding:12px;border:1px solid var(--line);border-radius:6px;cursor:pointer;font-size:13px}.choice input:checked+label{border-color:var(--navy);background:#eaf2f9;box-shadow:inset 0 0 0 1px var(--navy)}.choice input:focus-visible+label{outline:3px solid #8db8df}.button{display:inline-block;padding:13px 18px;border-radius:5px;background:var(--navy);color:white;border:0;font:inherit;font-size:13px;font-weight:600;cursor:pointer;text-align:center}.outline{background:white;color:var(--navy);border:1px solid #bdcede}.results{display:none}.step{padding:17px 0;border-bottom:1px solid var(--line)}.step h3{font-size:23px;margin:5px 0}.step p{font-size:13px;color:var(--muted)}.product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product{border:1px solid var(--line);border-radius:7px;padding:16px;background:#fff}.product h3{font-size:20px;margin:7px 0}.product p{font-size:12px;color:var(--muted)}.tag{font-size:10px;background:#eaf2f9;padding:4px 8px;border-radius:20px;color:var(--navy)}.notice{background:#e7f0f8;padding:20px;border-radius:8px;margin-top:20px;font-size:12px;color:#52677d}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}footer{text-align:center;padding:25px;color:var(--muted);font-size:11px;border-top:1px solid var(--line)}@media(max-width:540px){.choices,.product-grid{grid-template-columns:1fr}.actions .button{width:100%}}
+</style></head>
+<body><header class="top"><a class="brand" href="index.html">THE SKIN EDIT</a><a href="index.html">← Home</a></header>
+<main><p class="eyebrow">Your starting point · Free</p><h1>Build your basic routine.</h1><p class="intro">Tell us about your preferences to see general routine guidance and examples from our starter product catalogue. This is not a skin diagnosis.</p>
+<form id="form" class="panel">
+<div class="question"><fieldset><legend>1. How does your skin usually feel?</legend><div class="choices">
+<div class="choice"><input required type="radio" name="feel" id="dry" value="dry"><label for="dry">Dry or tight</label></div>
+<div class="choice"><input type="radio" name="feel" id="oily" value="oily"><label for="oily">Oily or shiny</label></div>
+<div class="choice"><input type="radio" name="feel" id="mixed" value="mixed"><label for="mixed">A mix of both</label></div>
+<div class="choice"><input type="radio" name="feel" id="unsure" value="unsure"><label for="unsure">Not sure</label></div>
+</div></fieldset></div>
+<div class="question"><fieldset><legend>2. Which texture do you prefer?</legend><div class="choices">
+<div class="choice"><input required type="radio" name="texture" id="light" value="light"><label for="light">Lightweight</label></div>
+<div class="choice"><input type="radio" name="texture" id="rich" value="rich"><label for="rich">Creamier / richer</label></div>
+<div class="choice"><input type="radio" name="texture" id="simple" value="simple"><label for="simple">As few steps as possible</label></div>
+<div class="choice"><input type="radio" name="texture" id="any" value="any"><label for="any">No preference</label></div>
+</div></fieldset></div>
+<div class="question"><fieldset><legend>3. Budget per product?</legend><div class="choices">
+<div class="choice"><input required type="radio" name="budget" id="low" value="low"><label for="low">Under A$15</label></div>
+<div class="choice"><input type="radio" name="budget" id="mid" value="mid"><label for="mid">A$15–30</label></div>
+<div class="choice"><input type="radio" name="budget" id="high" value="high"><label for="high">Over A$30</label></div>
+<div class="choice"><input type="radio" name="budget" id="anybudget" value="any"><label for="anybudget">Flexible</label></div>
+</div></fieldset></div>
+<div class="question"><fieldset><legend>4. Prefer fragrance-free products?</legend><div class="choices">
+<div class="choice"><input required type="radio" name="fragrance" id="yes" value="yes"><label for="yes">Yes</label></div>
+<div class="choice"><input type="radio" name="fragrance" id="no" value="no"><label for="no">No preference</label></div>
+</div></fieldset></div>
+<button class="button" type="submit">Build my free routine ↗</button><p id="error" role="alert"></p><p style="font-size:11px;color:var(--muted)">Answers stay in this page and are not sent to a server or saved.</p>
+</form>
+<section id="results" class="panel results" tabindex="-1" aria-live="polite"><p class="eyebrow">Your free edit</p><h2>A simple place to start.</h2><p id="summary" class="intro"></p>
+<div class="step"><span class="eyebrow">STEP 01 · CLEANSE</span><h3>Gentle cleanser</h3><p id="cleanserText"></p><div id="cleanserProducts" class="product-grid"></div></div>
+<div class="step"><span class="eyebrow">STEP 02 · MOISTURISE</span><h3>Moisturiser</h3><p id="moistText"></p><div id="moistProducts" class="product-grid"></div></div>
+<div class="step"><span class="eyebrow">STEP 03 · DAYTIME</span><h3>Broad-spectrum sunscreen</h3><p>Choose an Australian-compliant sunscreen with SPF 50 or 50+, apply generously and follow the label directions, including reapplication. Sunscreen is an important part of daytime sun protection.</p></div>
+<div class="step"><span class="eyebrow">OPTIONAL · NOT ESSENTIAL</span><h3>Serum</h3><p>A serum isn't required for a basic routine. If you want to explore one, start with a simple option and introduce one new product at a time. Check the current label and stop if irritation develops.</p><div id="serumProducts" class="product-grid"></div></div>
+<div class="notice">Product matches are based only on the preferences you selected. They do not establish that a product will suit your skin, and prices, ingredients and availability must be checked with the retailer. This site does not diagnose conditions.</div>
+<div class="actions"><a class="button" href="personal-edit.html">Explore the Personal Edit ↗</a><a class="button outline" href="products.html">Browse all products</a><button class="button outline" id="again" type="button">Start again</button></div>
+</section></main>
+<footer>© <span id="year"></span> The Skin Edit · Educational information only.</footer>
+<script src="data.js"></script>
+<script>
+document.getElementById("year").textContent=new Date().getFullYear();
+const form=document.getElementById("form"),results=document.getElementById("results"),db=window.SKIN_EDIT_DATA;
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function productCard(p){return `<article class="product"><span class="tag">${esc(p.type)}</span><h3>${esc(p.brand)}</h3><p><strong>${esc(p.name)}</strong></p><p>${esc(p.description)}</p><p>${esc(p.priceNote)}</p><a class="button" href="${esc(p.officialUrl)}" target="_blank" rel="noopener noreferrer">Check official site ↗</a></article>`}
+function matches(type,feel,texture,budget,fragrance){
+ let list=db.products.filter(p=>p.type===type);
+ list=list.filter(p=>(p.feel.includes(feel)||p.feel.includes("unsure"))&&(p.texture.includes(texture)||p.texture.includes("any"))&&(budget==="any"||p.budget.includes(budget))&&(!fragrance||p.fragranceFree));
+ if(!list.length)list=db.products.filter(p=>p.type===type);
+ return list.slice(0,2);
+}
+form.addEventListener("submit",e=>{
+ e.preventDefault();if(!form.reportValidity())return;
+ const d=new FormData(form),feel=d.get("feel"),texture=d.get("texture"),budget=d.get("budget"),fragrance=d.get("fragrance")==="yes";
+ const feelText={dry:"You selected dry or tight",oily:"You selected oily or shiny",mixed:"You selected a mix of skin-feel experiences",unsure:"You are not sure how to describe your skin yet"}[feel];
+ document.getElementById("summary").textContent=feelText+". These are preference-based suggestions, not a determination of your skin type or condition.";
+ document.getElementById("cleanserText").textContent=feel==="dry"?"Consider a gentle, non-stripping cleanser.":feel==="oily"?"Consider a gentle cleanser that removes everyday oil without leaving skin feeling stripped.":"A gentle cleanser is a sensible starting point.";
+ document.getElementById("moistText").textContent=feel==="dry"||texture==="rich"?"You may prefer a creamier moisturiser if that feels comfortable.":feel==="oily"||texture==="light"?"You may prefer a lighter lotion or gel-cream.":"Choose a moisturiser that feels comfortable and helps keep your skin hydrated.";
+ document.getElementById("cleanserProducts").innerHTML=matches("Cleanser",feel,texture,budget,fragrance).map(productCard).join("");
+ document.getElementById("moistProducts").innerHTML=matches("Moisturiser",feel,texture,budget,fragrance).map(productCard).join("");
+ document.getElementById("serumProducts").innerHTML=matches("Serum",feel,texture,budget,fragrance).map(productCard).join("");
+ form.style.display="none";results.style.display="block";results.focus();window.scrollTo({top:0,behavior:"smooth"});
+});
+document.getElementById("again").addEventListener("click",()=>{form.reset();form.style.display="block";results.style.display="none";form.scrollIntoView({behavior:"smooth"})});
+</script></body></html>
