@@ -1,34 +1,812 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f4f8fc">
-<title>The Skin Edit — Skin Science, Simplified</title>
-<meta name="description" content="Explore skincare ingredients, compare product options and build a simple routine with The Skin Edit.">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Skin Edit — Your Personal Skincare Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#173b62;--blue:#7399bd;--pale:#f4f8fc;--line:#dce6ef;--ink:#263b50;--muted:#6c7e90}
-*{box-sizing:border-box}body{margin:0;background:var(--pale);color:var(--ink);font-family:"DM Sans",Arial,sans-serif;line-height:1.7}a{color:inherit;text-decoration:none}
-.topline{background:var(--navy);color:#fff;text-align:center;padding:8px;font-size:10px;letter-spacing:1.8px;text-transform:uppercase}
-header{background:#f4f8fc;border-bottom:1px solid var(--line)}.nav{width:min(1120px,90%);margin:auto;min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:700;letter-spacing:2px;color:var(--navy)}.brand small{display:block;font-size:9px;color:var(--muted);font-weight:400;letter-spacing:1.5px}
-nav{display:flex;gap:24px;font-size:13px;color:var(--navy)}.container{width:min(1120px,90%);margin:auto}.hero{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center;padding:70px 0}.eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#628bb0}h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:400;color:var(--navy);line-height:1.2}h1{font-size:clamp(42px,6vw,68px);margin:16px 0}h1 em{color:#7399bd}.intro{max-width:500px;color:var(--muted);font-size:15px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.button{display:inline-block;padding:13px 18px;border-radius:5px;background:var(--navy);color:#fff;font-size:13px;font-weight:600}.outline{background:transparent;border:1px solid #bdcede;color:var(--navy)}.art{min-height:410px;border-radius:190px 190px 8px 8px;background:radial-gradient(circle at 65% 22%,white,transparent 36%),linear-gradient(140deg,#e8f1f9,#b8d0e4);display:grid;place-items:center}.orb{width:230px;height:280px;border-radius:48% 48% 30% 30%;border:1px solid #fff;background:linear-gradient(120deg,rgba(255,255,255,.9),rgba(129,170,203,.45),rgba(255,255,255,.8));display:grid;place-items:center;box-shadow:20px 25px 55px #173b6218;text-align:center;font-family:"Playfair Display",Georgia,serif;font-size:28px;color:var(--navy)}.orb small{display:block;font-family:"DM Sans",sans-serif;font-size:9px;letter-spacing:2px}
-.strip{background:#eaf2f9;border-block:1px solid var(--line);padding:20px 0}.strip .container{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:#4e6c88;font-size:10px;letter-spacing:1.2px;text-transform:uppercase}
-section.content{padding:75px 0}.section-head{margin-bottom:28px}.section-head h2{font-size:clamp(32px,4vw,44px);margin:8px 0}.section-head p{color:var(--muted);max-width:600px;font-size:14px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:24px}.card .num{color:var(--blue);font-size:11px;letter-spacing:2px}.card h3{font-size:24px;margin:10px 0}.card p{color:var(--muted);font-size:13px}.card a{display:inline-block;color:var(--navy);font-size:12px;font-weight:700;margin-top:12px}.feature{background:#e7f0f8;padding:55px 0}.feature h2{font-size:38px;margin:10px 0}.feature p{color:#61758a;max-width:650px;font-size:14px}.feature .button{margin-top:15px}footer{background:#17334f;color:#e8f0f7;padding:30px 5%;text-align:center;font-size:11px}footer p{color:#bacbda}
-@media(max-width:760px){.nav{align-items:flex-start;flex-direction:column;padding:17px 0}.nav nav{gap:14px;flex-wrap:wrap}.hero{grid-template-columns:1fr;padding:45px 0;gap:30px}.art{min-height:320px}.cards{grid-template-columns:1fr}.container{width:90%}section.content{padding:55px 0}}
+:root {
+  --ink:#292541;
+  --muted:#77728c;
+  --purple:#8065dc;
+  --pink:#f6b5d6;
+  --blue:#b4dfff;
+  --yellow:#ffe59a;
+  --green:#bdebd9;
+  --line:#eee7f4;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:#fffcff;color:var(--ink);
+  font-family:"DM Sans",sans-serif;line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button{cursor:pointer}
+img{max-width:100%}
+.topbar{
+  padding:16px 5%;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;flex-wrap:wrap;
+  background:#fff;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:20;
+}
+.logo{font-size:13px;font-weight:800;letter-spacing:2px}
+.logo span{color:var(--purple)}
+.nav{display:flex;gap:22px;align-items:center;flex-wrap:wrap;font-size:12px;font-weight:700}
+.nav a:hover{color:var(--purple)}
+.nav-cta{
+  background:var(--ink);color:white;padding:10px 15px;
+  border-radius:30px;
+}
+main{overflow:hidden}
+.wrap{width:min(1160px,91%);margin:auto}
+.eyebrow{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:#8065bc;
+}
+.hero{
+  position:relative;overflow:hidden;
+  padding:clamp(48px,8vw,95px) 0 65px;
+  background:linear-gradient(120deg,#f8d8eb 0%,#eee5ff 49%,#dff3ff 100%);
+}
+.hero:before{
+  content:"";position:absolute;width:380px;height:380px;
+  border-radius:50%;background:#fff8;right:-80px;top:-130px;
+}
+.hero:after{
+  content:"✳";position:absolute;right:8%;bottom:3%;
+  font-size:clamp(90px,17vw,200px);color:#fff9;
+  transform:rotate(-16deg);pointer-events:none;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.1fr .9fr;
+  align-items:center;gap:40px;position:relative;z-index:1;
+}
+.hero h1{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(48px,7vw,86px);font-weight:500;
+  line-height:1.02;letter-spacing:-2px;margin:17px 0;
+}
+.hero h1 em{color:#7e5cc5;font-weight:500}
+.hero p{max-width:520px;font-size:14px;color:#625b78}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn{
+  border:0;border-radius:30px;padding:14px 20px;
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:8px;font-size:12px;font-weight:800;transition:.2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-dark{background:var(--ink);color:white;box-shadow:0 7px 18px #29254122}
+.btn-white{background:#ffffffbd;color:var(--ink);border:1px solid #fff}
+.hero-note{font-size:10px!important;margin-top:15px}
+.hero-art{min-height:390px;position:relative;display:grid;place-items:center}
+.orbit{
+  width:min(340px,85vw);aspect-ratio:1;border-radius:50%;
+  background:linear-gradient(145deg,#ffffffa8,#ffffff2c);
+  border:1px solid #ffffffb0;display:grid;place-items:center;
+  position:relative;box-shadow:0 20px 60px #8269b21b;
+}
+.orbit-inner{
+  width:76%;aspect-ratio:1;border-radius:50%;
+  background:linear-gradient(145deg,#f6b9d8,#b8a4f5 55%,#9cd9f4);
+  display:grid;place-items:center;position:relative;
+}
+.orbit-inner:after{
+  content:"";position:absolute;inset:12px;border-radius:50%;
+  border:1px solid #ffffff91;
+}
+.bottle{
+  width:100px;height:160px;background:#fff;
+  border-radius:25px 25px 20px 20px;
+  position:relative;box-shadow:0 16px 24px #55407822;
+  transform:rotate(-8deg);display:flex;align-items:center;
+  justify-content:center;text-align:center;
+}
+.bottle:before{
+  content:"";position:absolute;width:38px;height:25px;
+  background:#d8caef;border-radius:6px 6px 2px 2px;top:-19px;
+}
+.bottle:after{
+  content:"THE SKIN EDIT";position:absolute;
+  top:67px;left:0;right:0;text-align:center;
+  font-size:8px;font-weight:800;letter-spacing:1px;
+}
+.bottle-label{font-family:"Playfair Display",serif;font-size:21px;color:#9876d9}
+.float{
+  position:absolute;z-index:2;padding:11px 15px;border-radius:16px;
+  background:#ffffffed;box-shadow:0 8px 28px #55407817;
+  font-size:11px;font-weight:800;
+}
+.f1{top:9%;left:-1%;transform:rotate(-6deg)}
+.f2{right:-1%;top:25%;transform:rotate(5deg)}
+.f3{bottom:7%;left:1%;transform:rotate(4deg)}
+.f4{right:0;bottom:7%;background:#fce4f1;transform:rotate(-5deg)}
+.stars{color:#9b75d9;letter-spacing:3px}
+.trustbar{background:#fff;padding:19px 0;border-bottom:1px solid var(--line)}
+.trust-inner{display:flex;justify-content:center;gap:30px;flex-wrap:wrap}
+.trust-item{font-size:11px;font-weight:700;color:#6f6984}
+.trust-item span{margin-right:7px;color:#9276d4}
+.section{padding:75px 0}
+.section-heading{text-align:center;max-width:650px;margin:0 auto 30px}
+.section-heading h2,.title{
+  font-family:"Playfair Display",serif;font-size:clamp(32px,5vw,48px);
+  font-weight:500;line-height:1.15;margin:10px 0;
+}
+.section-heading p{font-size:13px;color:var(--muted)}
+.quiz-section{
+  background:linear-gradient(145deg,#fff8fc,#f3efff 65%,#eaf7ff);
+  padding:65px 0;
+}
+.quiz-layout{
+  display:grid;grid-template-columns:.72fr 1.28fr;
+  gap:35px;align-items:start;
+}
+.quiz-intro{position:sticky;top:100px}
+.quiz-intro h2{
+  font-family:"Playfair Display",serif;font-weight:500;
+  font-size:clamp(35px,4.5vw,53px);line-height:1.08;margin:12px 0;
+}
+.quiz-intro p{font-size:13px;color:var(--muted)}
+.quiz-sticker{
+  margin-top:22px;background:#ffe4f1;padding:17px;
+  border-radius:18px;transform:rotate(-2deg);font-size:12px;
+}
+.quiz-card{
+  background:#fff;border:1px solid #ece4f6;
+  border-radius:25px;padding:clamp(20px,4vw,35px);
+  box-shadow:0 18px 50px #5a438d0b;
+}
+.progress-head{display:flex;justify-content:space-between;font-size:11px;font-weight:800}
+.progress{height:6px;border-radius:20px;background:#f0ebf8;margin:10px 0 26px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,#eaa7d2,#9278e7,#90cbed);transition:width .25s}
+.question{margin:0 0 24px}
+.question h3{font-size:16px;margin:0 0 5px}
+.question .hint{font-size:11px;color:var(--muted);margin:0 0 12px}
+.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.option{position:relative}
+.option input{position:absolute;opacity:0;pointer-events:none}
+.option label{
+  display:flex;align-items:center;gap:9px;
+  padding:12px;border:1px solid #eae5f2;border-radius:13px;
+  background:#fdfcff;font-size:11px;font-weight:700;
+  min-height:48px;cursor:pointer;transition:.15s;
+}
+.option label:hover{border-color:#b9a8e9}
+.option input:checked+label{
+  border-color:#8c72d9;background:#f0eaff;
+  box-shadow:inset 0 0 0 1px #8c72d9;
+}
+.option input:focus-visible+label{outline:2px solid #8065dc;outline-offset:2px}
+.option-icon{font-size:17px}
+.quiz-actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:25px}
+.quiz-actions button{border:0;border-radius:30px;padding:12px 18px;font-size:12px;font-weight:800}
+.back{background:#f2eff9;color:#625b7b}
+.next{background:var(--ink);color:white}
+.error{font-size:11px;color:#b33c68;margin-top:12px;min-height:17px}
+.result{display:none}
+.result.show{display:block}
+.result-banner{
+  padding:22px;border-radius:18px;
+  background:linear-gradient(130deg,#f8d9eb,#e9e0ff,#ddf3ff);
+}
+.result-banner h3{font-family:"Playfair Display",serif;font-size:29px;font-weight:500;margin:8px 0}
+.result-banner p{font-size:12px;color:#625b78}
+.result-list{display:grid;gap:10px;margin-top:17px}
+.result-item{padding:14px;border-radius:13px;background:#f8f6fc;font-size:12px}
+.result-item strong{display:block;margin-bottom:4px}
+.result-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.result-links a{font-size:11px;font-weight:800;color:#7156be;background:#f0eaff;padding:10px 13px;border-radius:20px}
+.features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.feature{
+  border-radius:22px;padding:21px;min-height:245px;
+  display:flex;flex-direction:column;align-items:flex-start;
+  transition:transform .2s,box-shadow .2s;
+}
+.feature:hover{transform:translateY(-5px);box-shadow:0 13px 25px #40335a12}
+.feature .emoji{font-size:34px;margin:6px 0 18px}
+.feature .tag{font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.feature h3{font-family:"Playfair Display",serif;font-weight:500;font-size:24px;margin:9px 0}
+.feature p{font-size:11px;color:#625d75;margin:0 0 20px}
+.feature .link{font-size:11px;font-weight:800;margin-top:auto}
+.fc1{background:#f8dfed}.fc2{background:#dff1ff}.fc3{background:#e3f6e9}.fc4{background:#fff0c8}
+.fc1 .tag{color:#a3447c}.fc2 .tag{color:#397ba6}.fc3 .tag{color:#3e8868}.fc4 .tag{color:#95701b}
+.feature-wide{
+  margin-top:18px;display:grid;grid-template-columns:1fr auto;align-items:center;
+  gap:20px;padding:25px 30px;border-radius:23px;
+  background:linear-gradient(110deg,#e8e1ff,#f9e2f1);
+}
+.feature-wide h3{font-family:"Playfair Display",serif;font-size:27px;font-weight:500;margin:6px 0}
+.feature-wide p{font-size:12px;color:#6c6582;margin:0}
+.round-arrow{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:20px}
+.face-section{background:#f3efff}
+.face-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center}
+.face-art{
+  background:linear-gradient(145deg,#f8d9ed,#dceeff);
+  border-radius:28px;padding:25px;text-align:center;
+}
+.face-art svg{width:min(100%,300px)}
+.face-art .small{font-size:10px;color:#706982}
+.zone{cursor:pointer;stroke:#fff;stroke-width:3;transition:.2s}
+.zone:hover,.zone.active{stroke:#7256c7;stroke-width:4;filter:brightness(.96)}
+.zone-text{font-family:"DM Sans",sans-serif;font-size:10px;font-weight:800;fill:#423750;pointer-events:none;text-anchor:middle}
+.zone-controls{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.zone-controls button{border:1px solid #e0d8f2;background:#fff;border-radius:20px;padding:8px 11px;font-size:10px;font-weight:800}
+.zone-controls button.active{background:#8065dc;color:#fff}
+.zone-info{padding:17px;background:#fff;border-radius:17px;margin-top:14px;text-align:left}
+.zone-info h3{margin:0 0 5px;font-size:17px}
+.zone-info p{font-size:11px;color:#6f6982;margin:5px 0}
+.face-copy h2{font-family:"Playfair Display",serif;font-size:clamp(35px,5vw,52px);font-weight:500;line-height:1.1;margin:12px 0}
+.face-copy p{font-size:13px;color:#6d6782}
+.face-bullets{display:grid;gap:10px;margin:20px 0}
+.face-bullets div{display:flex;gap:10px;font-size:12px;font-weight:700;align-items:center}
+.face-bullets span{width:27px;height:27px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.premium-section{padding:70px 0}
+.premium-card{
+  border-radius:30px;padding:clamp(25px,6vw,55px);
+  background:linear-gradient(120deg,#3f326e,#7355bd 60%,#c47fb7);
+  color:white;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.premium-card:after{content:"✦";position:absolute;right:4%;top:-70px;font-size:230px;color:#ffffff12}
+.premium-card h2{font-family:"Playfair Display",serif;font-size:clamp(35px,5vw,52px);font-weight:500;line-height:1.1;margin:12px 0}
+.premium-card p{font-size:12px;color:#eee5ff;max-width:520px}
+.premium-points{display:grid;gap:11px;margin-top:20px;font-size:12px}
+.premium-points span:before{content:"✦";color:#ffda9b;margin-right:10px}
+.price-card{
+  position:relative;z-index:1;background:#ffffff14;
+  border:1px solid #ffffff38;border-radius:23px;padding:24px;
+}
+.price-card .price{font-size:36px;font-weight:800}
+.price-card .price small{font-size:12px;font-weight:500}
+.price-card button{width:100%;border:0;background:#fff;color:#59439d;border-radius:30px;padding:13px;font-size:12px;font-weight:800;margin-top:10px}
+.disclaimer{font-size:10px!important}
+.quote{text-align:center;padding:65px 0}
+.quote blockquote{font-family:"Playfair Display",serif;font-size:clamp(28px,4.5vw,43px);line-height:1.2;max-width:760px;margin:15px auto}
+.quote p{font-size:11px;color:var(--muted)}
+.footer{background:#fff;border-top:1px solid var(--line);padding:35px 0}
+.footer-inner{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
+.footer p{font-size:11px;color:var(--muted);max-width:420px}
+.footer-links{display:flex;gap:15px;flex-wrap:wrap;font-size:11px;font-weight:700}
+.toast{font-size:11px;color:#8b365b;margin-top:8px}
+@media(max-width:900px){
+  .hero-grid,.quiz-layout,.face-layout,.premium-card{grid-template-columns:1fr}
+  .hero-art{min-height:330px}
+  .quiz-intro{position:static}
+  .features{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .premium-card{gap:20px}
+}
+@media(max-width:540px){
+  .topbar{position:static}
+  .nav{gap:12px}
+  .nav-cta{display:none}
+  .hero{padding-top:45px}
+  .hero-art{min-height:285px}
+  .orbit{width:260px}
+  .float{font-size:9px;padding:8px 10px}
+  .f1{left:0}.f2{right:0}
+  .section{padding:50px 0}
+  .features{grid-template-columns:1fr 1fr;gap:9px}
+  .feature{padding:15px;min-height:225px}
+  .feature h3{font-size:20px}
+  .feature p{font-size:10px}
+  .options{grid-template-columns:1fr}
+  .feature-wide{padding:20px}
+  .trust-inner{gap:12px}
+}
 </style>
 </head>
 <body>
-<div class="topline">Skin science, simplified — welcome to The Skin Edit</div>
-<header><div class="nav"><a class="brand" href="index.html">THE SKIN EDIT<small>SKIN SCIENCE, SIMPLIFIED.</small></a><nav><a href="ingredients.html">Ingredients</a><a href="products.html">Product guide</a><a href="routine.html">Free routine</a></nav></div></header>
+
+<header class="topbar">
+  <a class="logo" href="index.html">THE <span>SKIN</span> EDIT ✳</a>
+  <nav class="nav">
+    <a href="#skin-quiz">Skin quiz</a>
+    <a href="ingredients.html">Ingredients</a>
+    <a href="products.html">Products</a>
+    <a href="routine.html">Routine</a>
+    <a class="nav-cta" href="#skin-quiz">Find my Skin Edit ↗</a>
+  </nav>
+</header>
+
 <main>
-<section class="container hero"><div><p class="eyebrow">Your guide to understanding your skin</p><h1>Good skin starts with <em>understanding.</em></h1><p class="intro">Explore skincare ingredients, learn how products work and build a simple routine that fits your preferences — without the confusion or pressure to be perfect.</p><div class="actions"><a class="button" href="routine.html">Build My Free Routine ↗</a><a class="button outline" href="ingredients.html">Explore ingredients</a></div><p style="font-size:11px;color:var(--muted);margin-top:24px">Education first. Evidence-informed. No skin shaming.</p></div><div class="art" role="img" aria-label="Abstract icy blue skincare-inspired artwork"><div class="orb">The<br>Skin Edit<small>EST. IN SCIENCE</small></div></div></section>
-<div class="strip"><div class="container"><span>01 — Understand your skin</span><span>02 — Learn your ingredients</span><span>03 — Make informed choices</span></div></div>
-<section class="container content"><div class="section-head"><p class="eyebrow">The essentials</p><h2>Your skin, decoded.</h2><p>Start with the basics and explore skincare at your own pace.</p></div><div class="cards">
-<article class="card"><span class="num">01 / LEARN</span><h3>Ingredient library</h3><p>Plain-English explainers on common skincare ingredients, what they do and what to know before trying them.</p><a href="ingredients.html">Browse ingredients ↗</a></article>
-<article class="card"><span class="num">02 / EXPLORE</span><h3>Product guide</h3><p>Search a starter catalogue of real product lines and compare their general product types and preferences.</p><a href="products.html">Explore products ↗</a></article>
-<article class="card"><span class="num">03 / BUILD</span><h3>Your free routine</h3><p>Answer a few questions to see general cleanser, moisturiser and sun-protection guidance.</p><a href="routine.html">Build my routine ↗</a></article>
-</div></section>
-<section class="feature"><div class="container"><p class="eyebrow">Our philosophy</p><h2>Skincare without the pressure.</h2><p>Your skin doesn't need to be perfect. The Skin Edit is here to make skincare information easier to understand, with transparent product information and no promises of instant results.</p><a class="button" href="personal-edit.html">Discover the Personal Edit ↗</a></div></section>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Your skin. Your science. Your edit. ✳</div>
+      <h1>Skincare, but make it <em>make sense.</em></h1>
+      <p>
+        Welcome to your new favourite corner of skincare.
+        Understand ingredients, explore products and build a routine
+        that makes sense for your skin — without the confusing beauty jargon.
+      </p>
+      <div class="actions">
+        <a class="btn btn-dark" href="#skin-quiz">Take the skin quiz ✨</a>
+        <a class="btn btn-white" href="ingredients.html">Explore ingredients ↗</a>
+      </div>
+      <p class="hero-note">A skincare learning space · Not a diagnosis · No pressure to buy</p>
+    </div>
+    <div class="hero-art" aria-label="Decorative illustrated skincare bottle">
+      <div class="orbit">
+        <div class="orbit-inner">
+          <div class="bottle"><span class="bottle-label">✳</span></div>
+        </div>
+      </div>
+      <div class="float f1">♡ YOUR SKIN ERA</div>
+      <div class="float f2"><span class="stars">✦ ✦ ✦</span><br>Ingredient obsessed</div>
+      <div class="float f3">🫧 Keep it gentle</div>
+      <div class="float f4">The daily edit ✨</div>
+    </div>
+  </div>
+</section>
+
+<div class="trustbar">
+  <div class="wrap trust-inner">
+    <div class="trust-item"><span>✳</span>Ingredient education</div>
+    <div class="trust-item"><span>♡</span>Routine discovery</div>
+    <div class="trust-item"><span>☁</span>Skin-zone guide</div>
+    <div class="trust-item"><span>✦</span>Beauty without the pressure</div>
+  </div>
+</div>
+
+<section class="quiz-section" id="skin-quiz">
+  <div class="wrap quiz-layout">
+    <div class="quiz-intro">
+      <div class="eyebrow">01 / Your personal edit</div>
+      <h2>Let's talk about <em style="color:#936cc8">your skin.</em></h2>
+      <p>
+        Think of this as your skincare questionnaire. Answer a few quick
+        questions and get a simple learning guide based on what you select.
+      </p>
+      <div class="quiz-sticker">
+        <strong>💌 Your answers, your way</strong><br>
+        This quiz runs on this page. It doesn't send your answers to Google
+        Forms or save them to an account.
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div id="quizForm">
+        <div class="progress-head">
+          <span id="stepLabel">QUESTION 1 OF 5</span>
+          <span id="progressLabel">20%</span>
+        </div>
+        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+        <div class="question-step" data-step="0">
+          <div class="question">
+            <h3>1. How does your skin usually feel?</h3>
+            <p class="hint">Choose the closest match — it's okay if you're unsure.</p>
+            <div class="options">
+              <div class="option"><input type="radio" name="skinFeel" id="feel1" value="oily"><label for="feel1"><span class="option-icon">💧</span> Shiny or oily</label></div>
+              <div class="option"><input type="radio" name="skinFeel" id="feel2" value="dry"><label for="feel2"><span class="option-icon">☁️</span> Dry or tight</label></div>
+              <div class="option"><input type="radio" name="skinFeel" id="feel3" value="combination"><label for="feel3"><span class="option-icon">🌗</span> A mix of both</label></div>
+              <div class="option"><input type="radio" name="skinFeel" id="feel4" value="balanced"><label for="feel4"><span class="option-icon">🌸</span> Mostly comfortable</label></div>
+              <div class="option"><input type="radio" name="skinFeel" id="feel5" value="unsure"><label for="feel5"><span class="option-icon">🤍</span> I'm not sure</label></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-step" data-step="1" hidden>
+          <div class="question">
+            <h3>2. What would you like to learn about?</h3>
+            <p class="hint">Choose the main topic on your mind.</p>
+            <div class="options">
+              <div class="option"><input type="radio" name="concern" id="con1" value="blemishes"><label for="con1"><span class="option-icon">🫧</span> Blemishes and pores</label></div>
+              <div class="option"><input type="radio" name="concern" id="con2" value="dryness"><label for="con2"><span class="option-icon">💦</span> Dryness and hydration</label></div>
+              <div class="option"><input type="radio" name="concern" id="con3" value="tone"><label for="con3"><span class="option-icon">🌷</span> Uneven-looking tone</label></div>
+              <div class="option"><input type="radio" name="concern" id="con4" value="sensitivity"><label for="con4"><span class="option-icon">🩷</span> Sensitivity and comfort</label></div>
+              <div class="option"><input type="radio" name="concern" id="con5" value="basics"><label for="con5"><span class="option-icon">✨</span> Skincare basics</label></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-step" data-step="2" hidden>
+          <div class="question">
+            <h3>3. How does your skin react to new products?</h3>
+            <p class="hint">Your experience matters more than a label.</p>
+            <div class="options">
+              <div class="option"><input type="radio" name="sensitivity" id="sen1" value="sensitive"><label for="sen1"><span class="option-icon">🌸</span> Often gets irritated</label></div>
+              <div class="option"><input type="radio" name="sensitivity" id="sen2" value="sometimes"><label for="sen2"><span class="option-icon">🤔</span> Sometimes reacts</label></div>
+              <div class="option"><input type="radio" name="sensitivity" id="sen3" value="rarely"><label for="sen3"><span class="option-icon">🌿</span> Rarely reacts</label></div>
+              <div class="option"><input type="radio" name="sensitivity" id="sen4" value="unsure"><label for="sen4"><span class="option-icon">🤍</span> I'm not sure</label></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-step" data-step="3" hidden>
+          <div class="question">
+            <h3>4. What does your current routine look like?</h3>
+            <p class="hint">There are no wrong answers.</p>
+            <div class="options">
+              <div class="option"><input type="radio" name="routine" id="rou1" value="none"><label for="rou1"><span class="option-icon">🫧</span> Just getting started</label></div>
+              <div class="option"><input type="radio" name="routine" id="rou2" value="basic"><label for="rou2"><span class="option-icon">🧴</span> Cleanser and moisturiser</label></div>
+              <div class="option"><input type="radio" name="routine" id="rou3" value="sunscreen"><label for="rou3"><span class="option-icon">☀️</span> Basics plus sunscreen</label></div>
+              <div class="option"><input type="radio" name="routine" id="rou4" value="many"><label for="rou4"><span class="option-icon">✨</span> I use several products</label></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-step" data-step="4" hidden>
+          <div class="question">
+            <h3>5. What would you like your Skin Edit to focus on?</h3>
+            <p class="hint">Choose the kind of guide you want to explore.</p>
+            <div class="options">
+              <div class="option"><input type="radio" name="goal" id="goal1" value="simple"><label for="goal1"><span class="option-icon">🤍</span> A simple routine</label></div>
+              <div class="option"><input type="radio" name="goal" id="goal2" value="ingredients"><label for="goal2"><span class="option-icon">🧪</span> Understand ingredients</label></div>
+              <div class="option"><input type="radio" name="goal" id="goal3" value="products"><label for="goal3"><span class="option-icon">🛍️</span> Learn about products</label></div>
+              <div class="option"><input type="radio" name="goal" id="goal4" value="all"><label for="goal4"><span class="option-icon">💌</span> A bit of everything</label></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-actions">
+          <button class="back" id="backBtn" type="button" style="visibility:hidden">← Back</button>
+          <button class="next" id="nextBtn" type="button">Next question →</button>
+        </div>
+        <div class="error" id="quizError" aria-live="polite"></div>
+      </div>
+
+      <div class="result" id="quizResult" aria-live="polite">
+        <div class="eyebrow">YOUR SKIN EDIT ✳</div>
+        <div class="result-banner">
+          <div style="font-size:30px">💌 ✨ 🌷</div>
+          <h3 id="resultTitle">Your guide is ready.</h3>
+          <p id="resultIntro"></p>
+        </div>
+        <div class="result-list" id="resultList"></div>
+        <div class="result-links">
+          <a href="ingredients.html">Explore ingredients ↗</a>
+          <a href="products.html">Explore products ↗</a>
+          <a href="routine.html">Build a routine ↗</a>
+        </div>
+        <div class="quiz-actions">
+          <button class="back" id="restartBtn" type="button">↻ Retake quiz</button>
+        </div>
+        <p class="disclaimer">This is general educational information, not a diagnosis or personalised medical advice. Your answers stay in this page and are not stored or submitted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-heading">
+      <div class="eyebrow">02 / Your skincare playground</div>
+      <h2>Pick your next little obsession.</h2>
+      <p>Four ways to explore skincare without feeling like you need a chemistry degree.</p>
+    </div>
+
+    <div class="features">
+      <a class="feature fc1" href="ingredients.html">
+        <div class="tag">The science side</div>
+        <div class="emoji">🧪</div>
+        <h3>Ingredient Library</h3>
+        <p>Get to know acids, vitamins, hydrators and what they do.</p>
+        <span class="link">Explore ingredients ↗</span>
+      </a>
+      <a class="feature fc2" href="products.html">
+        <div class="tag">The product edit</div>
+        <div class="emoji">🧴</div>
+        <h3>Product Finder</h3>
+        <p>Explore skincare products and learn what to look for on labels.</p>
+        <span class="link">Browse products ↗</span>
+      </a>
+      <a class="feature fc3" href="routine.html">
+        <div class="tag">Your daily ritual</div>
+        <div class="emoji">☀️</div>
+        <h3>Routine Builder</h3>
+        <p>Learn the usual order of cleanser, moisturiser and sunscreen.</p>
+        <span class="link">Build a routine ↗</span>
+      </a>
+      <a class="feature fc4" href="#face-map">
+        <div class="tag">Face by face</div>
+        <div class="emoji">🎨</div>
+        <h3>Face Map</h3>
+        <p>Explore different facial zones and general skincare tips.</p>
+        <span class="link">Explore the map ↗</span>
+      </a>
+    </div>
+
+    <a href="#skin-quiz" class="feature-wide">
+      <div>
+        <div class="eyebrow">Not sure where to start?</div>
+        <h3>Your skin edit starts with five questions.</h3>
+        <p>Go back to the quiz and find the guide you want to explore first.</p>
+      </div>
+      <div class="round-arrow">↗</div>
+    </a>
+  </div>
+</section>
+
+<section class="section face-section" id="face-map">
+  <div class="wrap face-layout">
+    <div class="face-art">
+      <div class="eyebrow">Tap to explore</div>
+      <svg viewBox="0 0 280 315" role="img" aria-label="Interactive face map">
+        <path d="M65 83 Q49 78 54 112 Q59 138 75 140 M215 83 Q231 78 226 112 Q221 138 205 140" fill="#efc3b2" stroke="#d8a493" stroke-width="2"/>
+        <path d="M64 72 Q70 25 140 25 Q210 25 216 72 L207 164 Q198 229 140 252 Q82 229 73 164Z" fill="#f0c5b5" stroke="#d9a898" stroke-width="2"/>
+        <path class="zone active" data-zone="forehead" d="M77 63 Q140 37 203 63 L197 104 Q140 89 83 104Z" fill="#f4a8cc"/>
+        <path class="zone" data-zone="cheeks" d="M77 121 Q95 113 119 130 L112 171 Q91 181 77 157Z" fill="#9cdec8"/>
+        <path class="zone" data-zone="cheeks" d="M203 121 Q185 113 161 130 L168 171 Q189 181 203 157Z" fill="#9cdec8"/>
+        <path class="zone" data-zone="tzone" d="M120 100 Q140 94 160 100 L153 155 L140 172 L127 155Z" fill="#96cdf3"/>
+        <path class="zone" data-zone="chin" d="M115 190 Q140 200 165 190 L158 218 Q140 234 122 218Z" fill="#f5d77c"/>
+        <path d="M92 111 Q105 104 119 111 M161 111 Q175 104 188 111" fill="none" stroke="#77594e" stroke-width="3" stroke-linecap="round"/>
+        <path d="M98 125 Q106 131 115 125 M165 125 Q174 131 182 125" fill="none" stroke="#6e504b" stroke-width="2"/>
+        <path d="M140 122 L132 154 Q140 161 148 154" fill="none" stroke="#c18e7d" stroke-width="2"/>
+        <path d="M123 203 Q140 211 157 203" fill="none" stroke="#bb777f" stroke-width="3" stroke-linecap="round"/>
+        <text class="zone-text" x="140" y="72">FOREHEAD</text>
+        <text class="zone-text" x="97" y="148">CHEEK</text>
+        <text class="zone-text" x="183" y="148">CHEEK</text>
+        <text class="zone-text" x="140" y="140">T-ZONE</text>
+        <text class="zone-text" x="140" y="218">CHIN</text>
+      </svg>
+      <div class="zone-controls">
+        <button class="active" data-zone-button="forehead">Forehead</button>
+        <button data-zone-button="cheeks">Cheeks</button>
+        <button data-zone-button="tzone">Nose / T-zone</button>
+        <button data-zone-button="chin">Chin</button>
+      </div>
+      <div class="zone-info" id="zoneInfo">
+        <h3>Forehead ✨</h3>
+        <p>Different areas of the face can have different needs. Skin appearance alone cannot tell you exactly which ingredient to use.</p>
+        <p><strong>Tip:</strong> Start with gentle cleansing, moisturiser and daytime sunscreen.</p>
+      </div>
+      <p class="small">Illustration for education, not diagnosis.</p>
+    </div>
+
+    <div class="face-copy">
+      <div class="eyebrow">03 / The face edit</div>
+      <h2>Different zones. Different needs. <em style="color:#8667d5">One gentle approach.</em></h2>
+      <p>
+        Your forehead, cheeks, nose and chin may feel different.
+        Use the map to learn about common skincare considerations —
+        not to diagnose a condition from a picture.
+      </p>
+      <div class="face-bullets">
+        <div><span>🩷</span> Learn about common skin-zone differences</div>
+        <div><span>💧</span> Explore hydration and barrier basics</div>
+        <div><span>🫧</span> Understand why more actives isn't always better</div>
+      </div>
+      <a class="btn btn-dark" href="ingredients.html">Match the map with ingredients ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="premium-section">
+  <div class="wrap">
+    <div class="premium-card">
+      <div style="position:relative;z-index:1">
+        <div class="eyebrow" style="color:#e9d8ff">04 / A little extra ✦</div>
+        <h2>Meet The Skin Edit <em>Plus.</em></h2>
+        <p>
+          A preview of a future membership for people who want to learn more
+          about skincare ingredients, product labels and routine basics.
+        </p>
+        <div class="premium-points">
+          <span>Expanded ingredient learning guides</span>
+          <span>More detailed product explainers</span>
+          <span>Ingredient comparison features</span>
+        </div>
+      </div>
+      <div class="price-card">
+        <div class="eyebrow" style="color:#e9d8ff">Membership concept</div>
+        <div class="price">A$6.99 <small>/ month</small></div>
+        <p>Secure checkout and member accounts are not connected yet.</p>
+        <button type="button" id="premiumBtn">Preview Premium ✦</button>
+        <p class="disclaimer">No payment is taken. Premium access is not active.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap">
+    <div class="stars">✦ ✦ ✦</div>
+    <blockquote>“Your skincare routine doesn't need to be complicated to be thoughtful.”</blockquote>
+    <p>THE SKIN EDIT · SKINCARE EDUCATION, WITH A LITTLE EXTRA COLOUR</p>
+  </div>
+</section>
 </main>
-<footer>© <span id="year"></span> The Skin Edit<p>Educational content only — not a diagnosis or substitute for advice from a qualified health professional.</p></footer>
-<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
-</body></html>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="logo" href="index.html">THE <span>SKIN</span> EDIT ✳</a>
+      <p>A skincare education project to help make ingredient labels and everyday routines easier to understand.</p>
+      <p>Educational information only. Not a substitute for professional medical advice. Product formulas and results vary.</p>
+    </div>
+    <div class="footer-links">
+      <a href="ingredients.html">Ingredients</a>
+      <a href="products.html">Products</a>
+      <a href="routine.html">Routine builder</a>
+      <a href="#skin-quiz">Skin quiz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const quizSteps = [...document.querySelectorAll(".question-step")];
+let currentStep = 0;
+const quizForm = document.getElementById("quizForm");
+const nextBtn = document.getElementById("nextBtn");
+const backBtn = document.getElementById("backBtn");
+const quizError = document.getElementById("quizError");
+
+function updateStep(){
+  quizSteps.forEach((step,i)=>{
+    step.hidden = i !== currentStep;
+  });
+  const pct = Math.round(((currentStep+1)/quizSteps.length)*100);
+  document.getElementById("stepLabel").textContent =
+    `QUESTION ${currentStep+1} OF ${quizSteps.length}`;
+  document.getElementById("progressLabel").textContent = `${pct}%`;
+  document.getElementById("progressBar").style.width = `${pct}%`;
+  backBtn.style.visibility = currentStep === 0 ? "hidden" : "visible";
+  nextBtn.textContent = currentStep === quizSteps.length-1 ? "Show my Skin Edit ✨" : "Next question →";
+  quizError.textContent = "";
+}
+
+function answer(name){
+  return document.querySelector(`input[name="${name}"]:checked`)?.value || "";
+}
+
+nextBtn.addEventListener("click",()=>{
+  const names = ["skinFeel","concern","sensitivity","routine","goal"];
+  if(!answer(names[currentStep])){
+    quizError.textContent = "Choose an answer to continue — or select the closest match.";
+    return;
+  }
+  if(currentStep < quizSteps.length-1){
+    currentStep++;
+    updateStep();
+  } else {
+    showResults();
+  }
+});
+
+backBtn.addEventListener("click",()=>{
+  if(currentStep>0){
+    currentStep--;
+    updateStep();
+  }
+});
+
+function showResults(){
+  const a = {
+    feel:answer("skinFeel"),
+    concern:answer("concern"),
+    sensitivity:answer("sensitivity"),
+    routine:answer("routine"),
+    goal:answer("goal")
+  };
+
+  let title = "Your gentle starter edit ✨";
+  if(a.feel==="oily") title="Your balance-first edit 💧";
+  if(a.feel==="dry") title="Your hydration-first edit ☁️";
+  if(a.feel==="combination") title="Your mix-and-match edit 🌗";
+  if(a.feel==="balanced") title="Your keep-it-simple edit 🌸";
+  if(a.feel==="unsure") title="Your skin-discovery edit 🤍";
+
+  let intro = "Use these ideas as a starting point for learning. They aren't a diagnosis or a prescription for your skin.";
+  document.getElementById("resultTitle").textContent=title;
+  document.getElementById("resultIntro").textContent=intro;
+
+  const items=[];
+  if(a.feel==="dry"){
+    items.push(["Hydration focus","Learn about glycerin, hyaluronic acid and moisturisers that help reduce moisture loss."]);
+  }else if(a.feel==="oily"){
+    items.push(["Gentle cleansing","Oil is normal. Learn about gentle cleansing and avoid scrubbing or trying to remove every trace of oil."]);
+  }else if(a.feel==="combination"){
+    items.push(["Flexible moisturising","Different areas may feel different. A comfortable, simple moisturiser can be a useful starting point."]);
+  }else{
+    items.push(["Start with the basics","A gentle cleanser when needed, moisturiser and broad-spectrum sunscreen are useful routine basics."]);
+  }
+
+  if(a.concern==="blemishes"){
+    items.push(["Learn about blemish care","Explore ingredient explainers for salicylic acid and benzoyl peroxide, including their irritation risks. Ask a pharmacist or clinician if you're unsure what is suitable."]);
+  }else if(a.concern==="dryness"){
+    items.push(["Explore hydration","Look up glycerin, ceramides and hyaluronic acid to learn the difference between humectants and barrier-supporting ingredients."]);
+  }else if(a.concern==="tone"){
+    items.push(["Learn about uneven-looking tone","Explore vitamin C and azelaic acid as educational topics. Sunscreen helps protect skin from UV damage."]);
+  }else if(a.concern==="sensitivity"){
+    items.push(["Prioritise comfort","Consider fragrance-free basics and avoid introducing several active ingredients at once. Persistent irritation deserves professional advice."]);
+  }else{
+    items.push(["Build your ingredient vocabulary","Start with moisturisers, sunscreen, gentle cleansing and what ingredient labels can tell you."]);
+  }
+
+  if(a.sensitivity==="sensitive"){
+    items.push(["Take it slowly","New products can irritate skin. Keep changes gradual and stop using a product if it causes a reaction. Seek medical advice for a severe or persistent reaction."]);
+  }else if(a.sensitivity==="sometimes" || a.sensitivity==="unsure"){
+    items.push(["Patch-test new products","Follow the product instructions and introduce one new product at a time so you can notice how your skin responds."]);
+  }else{
+    items.push(["Keep your routine balanced","Even if products have felt fine before, using several strong actives together can cause irritation."]);
+  }
+
+  if(a.routine==="none"){
+    items.push(["Your first routine","Learn the basics before buying extras. You do not need a long routine or expensive products to start learning."]);
+  }else if(a.routine==="many"){
+    items.push(["Review what you already use","Check product directions and active ingredients before adding anything else. More products do not necessarily mean better results."]);
+  }else{
+    items.push(["Build on your basics","Learn about product order and daytime sunscreen before deciding whether you need extra steps."]);
+  }
+
+  if(a.goal==="ingredients"){
+    items.push(["Your next stop: Ingredient Library","Explore the colour-coded ingredient cards and learn what each ingredient is used for."]);
+  }else if(a.goal==="products"){
+    items.push(["Your next stop: Product Finder","Compare labels and product purposes, and verify current prices and formulas with the brand."]);
+  }else if(a.goal==="simple"){
+    items.push(["Your next stop: Routine Builder","Use the routine guide to understand the basics and avoid unnecessary extra steps."]);
+  }else{
+    items.push(["Your next stop: Explore the site","Visit the Ingredient Library, Product Finder and Routine Builder at your own pace."]);
+  }
+
+  const list=document.getElementById("resultList");
+  list.innerHTML=items.map(([heading,body])=>
+    `<div class="result-item"><strong>${heading}</strong>${body}</div>`
+  ).join("");
+
+  quizForm.style.display="none";
+  document.getElementById("quizResult").classList.add("show");
+}
+
+document.getElementById("restartBtn").addEventListener("click",()=>{
+  document.querySelectorAll('#quizForm input[type="radio"]').forEach(input=>input.checked=false);
+  document.getElementById("quizResult").classList.remove("show");
+  quizForm.style.display="block";
+  currentStep=0;
+  updateStep();
+});
+
+const zoneCopy={
+  forehead:{
+    title:"Forehead ✨",
+    text:"The forehead may feel oilier for some people, while others experience dryness or sensitivity. Appearance alone cannot tell you which ingredient you need.",
+    tip:"Try the basics first: gentle cleansing, moisturiser and daytime sunscreen."
+  },
+  cheeks:{
+    title:"Cheeks 🌸",
+    text:"Cheeks may be more prone to dryness or sensitivity for some people. Avoid assuming that every visible mark needs an active treatment.",
+    tip:"A comfortable moisturiser can help support the skin barrier."
+  },
+  tzone:{
+    title:"Nose / T-zone 💧",
+    text:"The nose and central forehead may have more visible oil for some people. Oiliness is normal and does not mean your skin is dirty.",
+    tip:"Avoid harsh scrubbing. Follow product directions if using an acne treatment."
+  },
+  chin:{
+    title:"Chin 🌼",
+    text:"The chin can have different needs from the rest of your face. A face map cannot identify the cause of a bump or irritation.",
+    tip:"Avoid picking at skin or adding several strong actives at once."
+  }
+};
+
+function chooseZone(zone){
+  if(!zoneCopy[zone])return;
+  document.querySelectorAll("[data-zone]").forEach(el=>{
+    el.classList.toggle("active",el.dataset.zone===zone);
+  });
+  document.querySelectorAll("[data-zone-button]").forEach(el=>{
+    el.classList.toggle("active",el.dataset.zoneButton===zone);
+  });
+  const z=zoneCopy[zone];
+  document.getElementById("zoneInfo").innerHTML=
+    `<h3>${z.title}</h3><p>${z.text}</p><p><strong>Tip:</strong> ${z.tip}</p>`;
+}
+document.querySelectorAll("[data-zone]").forEach(el=>{
+  el.addEventListener("click",()=>chooseZone(el.dataset.zone));
+});
+document.querySelectorAll("[data-zone-button]").forEach(el=>{
+  el.addEventListener("click",()=>chooseZone(el.dataset.zoneButton));
+});
+
+document.getElementById("premiumBtn").addEventListener("click",()=>{
+  alert("The Skin Edit Plus · A$6.99/month\n\nThis is a visual concept only. Secure checkout, subscriptions, accounts and cancellation are not connected. No payment will be taken.");
+});
+
+updateStep();
+</script>
+</body>
+</html>
