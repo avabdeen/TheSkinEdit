@@ -3,7 +3,7 @@ THE SKIN EDIT — STARTER WEBSITE ADD-ON
 FILES INCLUDED
 - data.js          Shared ingredient and product catalogue
 - ingredients.html Searchable ingredient library
-- products.html    Searchable starter product catalogue
+- products.html    Searchable product catalogue with indicative AUD price estimates and colourful illustrated product cards
 
 HOW TO ADD TO YOUR EXISTING GITHUB REPOSITORY
 1. Open your repository.
@@ -17,7 +17,7 @@ HOW TO ADD TO YOUR EXISTING GITHUB REPOSITORY
 IMPORTANT
 - Keep these files together in the same folder as index.html and routine.html.
 - The product database is a starter catalogue, not a live price/stock feed.
-- Prices are intentionally not hard-coded because prices, pack sizes, product formulas and availability can change.
+- Prices shown are indicative estimates in AUD, not live retailer prices; pack sizes, product formulas and availability can change. The product-card artwork is illustrative, not a photograph of the exact product.
 - Verify each product's current Australian name, label, ingredient list, official link and availability before launch.
 - Ingredient summaries link to educational sources. Review them before publishing and add a visible editorial review date.
 - The site is static: it does not collect personal data, accept payments, save routines or provide medical diagnosis.
