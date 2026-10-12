@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f8fc">
+  <title>The Personal Edit | The Skin Edit</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #173b62;
+      --blue: #7399bd;
+      --pale: #f4f8fc;
+      --line: #dce6ef;
+      --ink: #263b50;
+      --muted: #6c7e90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--pale); color: var(--ink);
+      font-family: "DM Sans", Arial, sans-serif; line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    .top {
+      padding: 20px 5%; background: white; border-bottom: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center; gap: 15px;
+    }
+    .brand { color: var(--navy); font-weight: 700; letter-spacing: 2px; }
+    .back { color: var(--navy); font-size: 13px; }
+    main { width: min(980px, 92%); margin: 55px auto 75px; }
+    .hero {
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 45px;
+      align-items: center;
+    }
+    .eyebrow {
+      color: #628bb0; font-size: 11px; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 700;
+    }
+    h1, h2, h3 {
+      font-family: "Playfair Display", Georgia, serif; font-weight: 400;
+      line-height: 1.2; color: var(--navy);
+    }
+    h1 { font-size: clamp(42px, 6vw, 62px); margin: 12px 0 20px; }
+    h2 { font-size: 34px; }
+    .intro { color: var(--muted); max-width: 540px; }
+    .price { color: var(--navy); font-size: 36px; margin: 20px 0 4px; }
+    .price small { font-size: 13px; color: var(--muted); }
+    .button {
+      display: inline-block; border-radius: 6px; padding: 14px 20px;
+      background: var(--navy); color: white; border: 0; font: inherit;
+      font-weight: 600; font-size: 13px; cursor: pointer; text-align: center;
+    }
+    .button:hover { background: #254f78; }
+    .button-outline { background: white; color: var(--navy); border: 1px solid #bdcede; }
+    .art {
+      min-height: 340px; border-radius: 160px 160px 8px 8px;
+      background: radial-gradient(circle at 65% 30%, white, transparent 40%),
+        linear-gradient(140deg, #e7f0f8, #b6cfe3);
+      display: grid; place-items: center;
+    }
+    .art span {
+      font-family: "Playfair Display", Georgia, serif; font-size: 85px;
+      color: var(--navy); border: 1px solid rgba(255,255,255,.9);
+      width: 190px; height: 190px; border-radius: 50%;
+      display: grid; place-items: center;
+    }
+    .section { margin-top: 75px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card {
+      background: white; border: 1px solid var(--line); border-radius: 8px;
+      padding: 23px;
+    }
+    .number { color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: 2px; }
+    h3 { font-size: 22px; margin: 9px 0; }
+    .card p, .section-copy { font-size: 13px; color: var(--muted); }
+    .callout {
+      background: #e7f0f8; padding: 28px; border-radius: 9px; margin-top: 55px;
+    }
+    .callout p { color: var(--muted); font-size: 13px; }
+    .fine-print { color: var(--muted); font-size: 11px; margin-top: 22px; }
+    footer {
+      border-top: 1px solid var(--line); text-align: center;
+      padding: 24px 5%; color: var(--muted); font-size: 11px;
+    }
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; }
+      .art { min-height: 250px; }
+      .art span { width: 150px; height: 150px; font-size: 65px; }
+      .cards { grid-template-columns: 1fr; }
+      .section { margin-top: 55px; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">THE SKIN EDIT</a>
+    <a class="back" href="routine.html">← Free routine</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">A more considered routine</p>
+        <h1>Meet your<br><em>Personal Edit.</em></h1>
+        <p class="intro">
+          More than a list of products. A guided way to understand your
+          skincare preferences, compare options and build a routine
+          that feels manageable.
+        </p>
+        <div class="price">A$7.99 <small>one-time proposed price</small></div>
+        <p class="intro">No subscription planned for the initial version.</p>
+        <p style="margin-top:25px">
+          <a class="button" href="#included">See what's included ↗</a>
+        </p>
+      </div>
+      <div class="art" role="img" aria-label="Abstract blue editorial design">
+        <span>S.</span>
+      </div>
+    </section>
+
+    <section class="section" id="included">
+      <p class="eyebrow">The Personal Edit includes</p>
+      <h2>A little more guidance.</h2>
+      <p class="section-copy">
+        The planned premium version will expand on the free routine
+        with more ways to compare and organise everyday skincare.
+      </p>
+
+      <div class="cards">
+        <article class="card">
+          <span class="number">01 / YOUR ROUTINE</span>
+          <h3>Morning & evening</h3>
+          <p>A clear order of use, with explanations of each step and guidance on keeping things simple.</p>
+        </article>
+        <article class="card">
+          <span class="number">02 / YOUR BUDGET</span>
+          <h3>Compare options</h3>
+          <p>Explore product types across different price ranges, with transparent criteria and any affiliate disclosures.</p>
+        </article>
+        <article class="card">
+          <span class="number">03 / YOUR PLAN</span>
+          <h3>Build gradually</h3>
+          <p>A routine checklist to help organise products and introduce changes one at a time.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="callout">
+      <p class="eyebrow">Early version</p>
+      <h2>We're building the Personal Edit.</h2>
+      <p>
+        This page describes the planned premium features. Payment,
+        product matching, routine saving and the full premium planner
+        are not connected yet. We won't charge you until checkout is
+        properly set up and the promised features are available.
+      </p>
+      <a class="button button-outline" href="routine.html">Try the free routine ↗</a>
+    </section>
+
+    <p class="fine-print">
+      The Skin Edit provides general educational information, not
+      medical diagnosis or treatment. Product suitability varies.
+      Seek advice from a qualified health professional for persistent
+      skin concerns. The proposed price is in Australian dollars and
+      may change before launch.
+    </p>
+  </main>
+
+  <footer>© <span id="year"></span> The Skin Edit · Skin science, simplified.</footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
